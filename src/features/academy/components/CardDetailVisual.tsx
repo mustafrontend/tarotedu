@@ -12,20 +12,20 @@ export const CardDetailVisual: React.FC<CardDetailVisualProps> = ({
   localizedName,
 }) => {
   return (
-    <div className="w-36 h-56 sm:w-40 sm:h-64 rounded-2xl bg-slate-900 border-2 border-purple-400/50 shadow-xl overflow-hidden relative shrink-0">
+    <div className="w-full max-w-[280px] h-80 sm:max-w-xs sm:h-96 rounded-3xl bg-slate-950 border-2 border-purple-400/60 shadow-2xl overflow-hidden relative mx-auto shrink-0 transition-all duration-300 hover:border-purple-300">
       {videoUrl ? (
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover scale-105"
           src={videoUrl}
         />
       ) : null}
       {videoUrl && (
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-2 text-center">
-          <span className="text-[10px] font-black text-amber-300 tracking-wider uppercase">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-3 text-center">
+          <span className="text-xs font-black text-amber-300 tracking-wider uppercase drop-shadow">
             #{number} {localizedName}
           </span>
         </div>
