@@ -3,6 +3,7 @@ import { useTarotStore } from '../../store/tarotStore'
 import { GlassmorphicHeaderCard } from './components/GlassmorphicHeaderCard'
 import { CategorySegmentedPillBar } from './components/CategorySegmentedPillBar'
 import { MoonPhaseWidget } from './components/MoonPhaseWidget'
+import { MysticAiShowcaseSection } from './components/MysticAiShowcaseSection'
 import { AppleMusicFeaturedCarousel } from './components/AppleMusicFeaturedCarousel'
 import { AppleCardListSection } from './components/AppleCardListSection'
 import { HowToReadHomeSection } from './components/HowToReadHomeSection'
@@ -37,6 +38,9 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
 
       {/* 3. Live Moon Phase & Celestial Synchronicity Widget */}
       <MoonPhaseWidget />
+
+      {/* 3.5. 5 New Esoteric AI Features Showcase */}
+      <MysticAiShowcaseSection onNavigate={onNavigate} />
 
       {/* 4. Apple Music Style Horizontal Featured Hero Carousel */}
       <AppleMusicFeaturedCarousel onNavigate={onNavigate} />
