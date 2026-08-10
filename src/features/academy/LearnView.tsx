@@ -38,12 +38,17 @@ export const LearnView: React.FC<LearnViewProps> = ({ onOpenPaywall, onNavigate 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
         {filteredCards.map((card) => {
           const isLearned = learnedCards.includes(card.id)
+          const prevCard = card.number > 0 ? majorArcana.find((c) => c.number === card.number - 1) : null
+          const isPrevLearned = card.number === 0 ? true : (prevCard ? learnedCards.includes(prevCard.id) : true)
+          const isSequentialLocked = !isPrevLearned
+
           return (
             <AcademyCardItem
               key={card.id}
               card={card}
               isLearned={isLearned}
               isPro={isPro}
+              isSequentialLocked={isSequentialLocked}
               onClick={() => setSelectedCard(card)}
             />
           )
@@ -55,6 +60,7 @@ export const LearnView: React.FC<LearnViewProps> = ({ onOpenPaywall, onNavigate 
         isOpen={!!selectedCard}
         onClose={() => setSelectedCard(null)}
         onOpenPaywall={onOpenPaywall}
+        onSelectCard={(c) => setSelectedCard(c)}
       />
 
       <HowToReadTarotModal

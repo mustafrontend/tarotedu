@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CheckCircle2, Bookmark, Compass, Lock, Crown } from 'lucide-react'
+import { CheckCircle2, Bookmark, Compass, Lock, Crown, ChevronLeft } from 'lucide-react'
 import { TarotCard } from '../../types/tarot'
+import { majorArcana } from '../../data/majorArcana'
 import { ModalBase } from '../../components/atoms/ModalBase'
 import { Button } from '../../components/atoms/Button'
 import { Badge } from '../../components/atoms/Badge'
@@ -14,6 +15,7 @@ interface CardDetailModalProps {
   isOpen: boolean
   onClose: () => void
   onOpenPaywall?: () => void
+  onSelectCard?: (card: TarotCard) => void
 }
 
 export const CardDetailModal: React.FC<CardDetailModalProps> = ({
@@ -21,6 +23,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
   isOpen,
   onClose,
   onOpenPaywall,
+  onSelectCard,
 }) => {
   const { t } = useTranslation()
   const theme = useTarotStore((state) => state.theme)
@@ -32,8 +35,12 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
 
   if (!card) return null
 
+  const prevCard = card.number > 0 ? majorArcana.find((c) => c.number === card.number - 1) : null
+  const isPrevLearned = card.number === 0 ? true : (prevCard ? learnedCards.includes(prevCard.id) : true)
+  const isSequentialLocked = !isPrevLearned
+
   const isFreeLesson = card.number === 0
-  const isLocked = !isFreeLesson && !isPro
+  const isProLocked = !isFreeLesson && !isPro
   const isLearned = learnedCards.includes(card.id)
   const localizedName = t(`cards.${card.id}.name`, card.name)
 
@@ -47,46 +54,64 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Badge variant="purple">{t('academy.majorArcana')} #{card.number}</Badge>
-                {isFreeLesson && <Badge variant="emerald">Ücretsiz Ders</Badge>}
-                {!isFreeLesson && !isPro && <Badge variant="amber">PRO Ders</Badge>}
+                {isSequentialLocked ? (
+                  <Badge variant="amber">🔒 Sıralı Kilit</Badge>
+                ) : isFreeLesson ? (
+                  <Badge variant="emerald">Ücretsiz Ders</Badge>
+                ) : isProLocked ? (
+                  <Badge variant="amber">PRO Ders</Badge>
+                ) : null}
               </div>
             </div>
 
             <div className={`flex p-1 rounded-xl border text-xs font-bold transition-colors ${
               isDark ? 'bg-slate-900/90 border-purple-500/30' : 'bg-slate-200/80 border-slate-300'
             }`}>
-              <button
-                onClick={() => setActiveTab('core')}
-                className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'core' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
-                }`}
-              >
-                Anlamlar
-              </button>
-              <button
-                onClick={() => setActiveTab('symbolism')}
-                className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'symbolism' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
-                }`}
-              >
-                Sembolizm
-              </button>
-              <button
-                onClick={() => setActiveTab('loveCareer')}
-                className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'loveCareer' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
-                }`}
-              >
-                Aşk & Kariyer
-              </button>
+              {['core', 'symbolism', 'loveCareer'].map((tabKey) => (
+                <button
+                  key={tabKey}
+                  onClick={() => setActiveTab(tabKey as any)}
+                  className={`flex-1 py-1.5 rounded-lg transition-colors capitalize ${
+                    activeTab === tabKey ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
+                  }`}
+                >
+                  {tabKey === 'core' ? 'Anlamlar' : tabKey === 'symbolism' ? 'Sembolizm' : 'Aşk & Kariyer'}
+                </button>
+              ))}
             </div>
 
-            {isLocked ? (
+            {isSequentialLocked ? (
+              <div className="relative rounded-2xl overflow-hidden min-h-[160px] border border-rose-500/40 bg-slate-900/90 p-4 shadow-xl">
+                <div className="filter blur-md select-none opacity-20 pointer-events-none">
+                  <CardDetailTabsContent card={card} activeTab={activeTab} />
+                </div>
+                <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center space-y-2 z-20">
+                  <div className="w-10 h-10 rounded-2xl bg-rose-500/20 border border-rose-500/50 flex items-center justify-center text-rose-300 shadow-lg animate-bounce">
+                    <Lock className="w-5 h-5 text-rose-400" />
+                  </div>
+                  <div className="space-y-0.5 max-w-xs">
+                    <h4 className="text-xs font-black text-white">🔒 Sıralı Müfredat Kilitli!</h4>
+                    <p className="text-[10px] text-purple-200/80 font-medium leading-tight">
+                      Bu dersi açabilmek için öncelikle #{prevCard?.number} {prevCard ? t(`cards.${prevCard.id}.name`, prevCard.name) : ''} dersini "Öğrenildi" olarak bitirmelisiniz.
+                    </p>
+                  </div>
+                  {prevCard && (
+                    <button
+                      onClick={() => onSelectCard?.(prevCard)}
+                      className="flex items-center gap-1 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer border border-purple-400/40"
+                    >
+                      <ChevronLeft className="w-3.5 h-3.5" />
+                      <span>Önceki Derse Git (#{prevCard.number})</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : isProLocked ? (
               <div className="relative rounded-2xl overflow-hidden min-h-[160px] border border-amber-400/40 bg-slate-900/90 p-4 shadow-xl">
                 <div className="filter blur-md select-none opacity-20 pointer-events-none">
                   <CardDetailTabsContent card={card} activeTab={activeTab} />
                 </div>
-                <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center space-y-2.5 z-20">
+                <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center space-y-2 z-20">
                   <div className="w-10 h-10 rounded-2xl bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 shadow-lg animate-pulse">
                     <Lock className="w-5 h-5" />
                   </div>
@@ -111,7 +136,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           </div>
         </div>
 
-        {!isLocked && (
+        {!isSequentialLocked && !isProLocked && (
           <div>
             <h4 className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1 mb-2 ${
               isDark ? 'text-amber-300' : 'text-purple-900'
@@ -128,7 +153,12 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
         )}
 
         <div className="pt-2 flex justify-end">
-          <Button variant={isLearned ? 'secondary' : 'mystic'} size="md" onClick={() => toggleLearned(card.id)}>
+          <Button
+            variant={isLearned ? 'secondary' : 'mystic'}
+            size="md"
+            disabled={isSequentialLocked}
+            onClick={() => toggleLearned(card.id)}
+          >
             {isLearned ? (
               <>
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />

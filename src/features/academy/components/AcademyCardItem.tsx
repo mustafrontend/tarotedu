@@ -9,6 +9,7 @@ interface AcademyCardItemProps {
   card: TarotCard
   isLearned: boolean
   isPro: boolean
+  isSequentialLocked: boolean
   onClick: () => void
 }
 
@@ -16,19 +17,24 @@ export const AcademyCardItem: React.FC<AcademyCardItemProps> = ({
   card,
   isLearned,
   isPro,
+  isSequentialLocked,
   onClick,
 }) => {
   const { t } = useTranslation()
   const theme = useTarotStore((state) => state.theme)
   const isDark = theme === 'dark'
   const isFreeLesson = card.number === 0
-  const isLocked = !isFreeLesson && !isPro
+  const isProLocked = !isFreeLesson && !isPro
 
   return (
     <CardBase
       onClick={onClick}
-      className={`relative p-0 overflow-hidden flex flex-col justify-between h-48 text-white border shadow-md group cursor-pointer ${
-        isDark ? 'bg-slate-900 border-purple-500/30 hover:border-purple-400' : 'bg-slate-900 border-purple-400/40 hover:border-purple-600'
+      className={`relative p-0 overflow-hidden flex flex-col justify-between h-48 text-white border shadow-md group cursor-pointer transition-all ${
+        isSequentialLocked
+          ? 'opacity-60 saturate-50 bg-slate-950 border-slate-700'
+          : isDark
+          ? 'bg-slate-900 border-purple-500/30 hover:border-purple-400'
+          : 'bg-slate-900 border-purple-400/40 hover:border-purple-600'
       }`}
     >
       {card.videoUrl ? (
@@ -45,7 +51,12 @@ export const AcademyCardItem: React.FC<AcademyCardItemProps> = ({
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-purple-950/50 p-3 flex flex-col justify-between z-10">
         <div className="flex items-center justify-between text-[11px] font-mono font-bold text-amber-300">
           <span>#{card.number}</span>
-          {isLocked ? (
+          {isSequentialLocked ? (
+            <div className="bg-slate-800 text-rose-300 border border-rose-500/40 px-1.5 py-0.5 rounded-md font-extrabold text-[9px] flex items-center gap-0.5 shadow-sm">
+              <Lock className="w-2.5 h-2.5 text-rose-400" />
+              <span>#{card.number - 1}'i Bitir</span>
+            </div>
+          ) : isProLocked ? (
             <div className="bg-amber-400 text-slate-950 px-1.5 py-0.5 rounded-md font-extrabold text-[9px] flex items-center gap-0.5 shadow-sm">
               <Lock className="w-2.5 h-2.5" />
               <span>PRO</span>
