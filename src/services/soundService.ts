@@ -3,6 +3,11 @@ class SoundService {
   private ambientInterval: any = null
   private activeTrackId: string | null = null
   private isUnlocked = false
+  private silentAudioElem: HTMLAudioElement | null = null
+
+  // 0.1 sec silent WAV data URI to force iOS Hardware Audio Session active (Bypasses iOS Silent Switch Mute)
+  private SILENT_AUDIO_URI =
+    'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=='
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -22,17 +27,26 @@ class SoundService {
 
   public unlockAudioOnUserInteraction(): void {
     try {
-      const ctx = this.getAudioContext()
-      if (!ctx) return
-      if (ctx.state === 'suspended') {
-        ctx.resume()
+      // 1. Play silent HTML5 Audio element to activate iOS Hardware Audio Session
+      if (typeof window !== 'undefined') {
+        if (!this.silentAudioElem) {
+          this.silentAudioElem = new Audio(this.SILENT_AUDIO_URI)
+        }
+        this.silentAudioElem.play().catch(() => {})
       }
-      // Play 1-sample silent buffer to unlock iOS Safari & Capacitor WebAudio
-      const buffer = ctx.createBuffer(1, 1, 22050)
-      const source = ctx.createBufferSource()
-      source.buffer = buffer
-      source.connect(ctx.destination)
-      source.start(0)
+
+      // 2. Unlock WebAudio AudioContext
+      const ctx = this.getAudioContext()
+      if (ctx) {
+        if (ctx.state === 'suspended') {
+          ctx.resume()
+        }
+        const buffer = ctx.createBuffer(1, 1, 22050)
+        const source = ctx.createBufferSource()
+        source.buffer = buffer
+        source.connect(ctx.destination)
+        source.start(0)
+      }
       this.isUnlocked = true
     } catch (e) {
       console.warn('[SoundService] Audio unlock error:', e)
@@ -93,7 +107,7 @@ class SoundService {
         osc.type = 'triangle'
         osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08)
 
-        gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.08)
+        gain.gain.setValueAtTime(0.25, ctx.currentTime + idx * 0.08)
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.6)
 
         osc.connect(gain)
@@ -119,7 +133,7 @@ class SoundService {
       osc.type = 'sine'
       osc.frequency.setValueAtTime(400, ctx.currentTime)
 
-      gain.gain.setValueAtTime(0.15, ctx.currentTime)
+      gain.gain.setValueAtTime(0.2, ctx.currentTime)
       gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05)
 
       osc.connect(gain)
@@ -142,23 +156,25 @@ class SoundService {
       const ctx = this.getAudioContext()
       if (!ctx) return
 
+      const now = ctx.currentTime
+
       // Primary Tibetan Bowl Tone
       const osc1 = ctx.createOscillator()
       const gain1 = ctx.createGain()
       osc1.type = 'sine'
-      osc1.frequency.setValueAtTime(freq, ctx.currentTime)
+      osc1.frequency.setValueAtTime(freq, now)
 
       // Soft Bell Attack & Gentle Decay (Fade over 3.2s)
-      gain1.gain.setValueAtTime(0.25, ctx.currentTime)
-      gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.2)
+      gain1.gain.setValueAtTime(0.35, now)
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 3.2)
 
       // Warm Octave Sub-Harmonic (Warmth)
       const osc2 = ctx.createOscillator()
       const gain2 = ctx.createGain()
       osc2.type = 'triangle'
-      osc2.frequency.setValueAtTime(freq / 2, ctx.currentTime)
-      gain2.gain.setValueAtTime(0.1, ctx.currentTime)
-      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.2)
+      osc2.frequency.setValueAtTime(freq / 2, now)
+      gain2.gain.setValueAtTime(0.15, now)
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 3.2)
 
       osc1.connect(gain1)
       gain1.connect(ctx.destination)
@@ -166,11 +182,11 @@ class SoundService {
       osc2.connect(gain2)
       gain2.connect(ctx.destination)
 
-      osc1.start(ctx.currentTime)
-      osc2.start(ctx.currentTime)
+      osc1.start(now)
+      osc2.start(now)
 
-      osc1.stop(ctx.currentTime + 3.2)
-      osc2.stop(ctx.currentTime + 3.2)
+      osc1.stop(now + 3.2)
+      osc2.stop(now + 3.2)
     } catch (e) {
       console.warn('[SoundService] Bell strike error:', e)
     }
