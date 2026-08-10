@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Sparkles, Play, ChevronRight } from 'lucide-react'
 import { majorArcana } from '../../../data/majorArcana'
+import { useTarotStore } from '../../../store/tarotStore'
 
 interface AppleMusicFeaturedCarouselProps {
   onNavigate: (tab: any) => void
@@ -11,22 +12,31 @@ export const AppleMusicFeaturedCarousel: React.FC<AppleMusicFeaturedCarouselProp
   onNavigate,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
+
   const featuredCards = majorArcana.slice(0, 4)
 
   return (
     <div className="space-y-2 font-sans">
       <div className="flex justify-between items-end px-1">
         <div>
-          <span className="text-[10px] font-bold text-purple-300 uppercase tracking-widest block">
+          <span className={`text-[10px] font-bold uppercase tracking-widest block ${
+            isDark ? 'text-purple-300' : 'text-purple-700'
+          }`}>
             ÖNE ÇIKAN DERS & DESTE
           </span>
-          <h3 className="text-xl font-black text-white tracking-tight">
+          <h3 className={`text-xl font-black tracking-tight ${
+            isDark ? 'text-white' : 'text-slate-900'
+          }`}>
             Günün Vitrini
           </h3>
         </div>
         <button
           onClick={() => onNavigate('learn')}
-          className="text-xs font-bold text-amber-300 hover:text-white flex items-center gap-0.5"
+          className={`text-xs font-bold flex items-center gap-0.5 transition-colors ${
+            isDark ? 'text-amber-300 hover:text-white' : 'text-purple-700 hover:text-purple-900'
+          }`}
         >
           <span>Tümünü Gör</span>
           <ChevronRight className="w-4 h-4" />
@@ -43,7 +53,11 @@ export const AppleMusicFeaturedCarousel: React.FC<AppleMusicFeaturedCarouselProp
             <div
               key={card.id}
               onClick={() => onNavigate('learn')}
-              className="snap-center shrink-0 w-[82vw] sm:w-[340px] rounded-3xl bg-slate-900 border border-purple-500/30 overflow-hidden relative shadow-2xl group cursor-pointer"
+              className={`snap-center shrink-0 w-[82vw] sm:w-[340px] rounded-3xl overflow-hidden relative shadow-xl group cursor-pointer border transition-all ${
+                isDark
+                  ? 'bg-slate-900 border-purple-500/30'
+                  : 'bg-white border-slate-200 shadow-md hover:shadow-lg'
+              }`}
             >
               {/* Media Background */}
               <div className="h-52 w-full relative overflow-hidden bg-slate-950">
@@ -53,7 +67,7 @@ export const AppleMusicFeaturedCarousel: React.FC<AppleMusicFeaturedCarouselProp
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-500"
                     src={card.videoUrl}
                   />
                 ) : (

@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Sparkles, Layers, ArrowRight } from 'lucide-react'
 import { CardBase } from '../../../components/atoms/CardBase'
+import { useTarotStore } from '../../../store/tarotStore'
 
 interface SpreadsShowcaseSectionProps {
   onNavigate: (tab: any) => void
@@ -11,6 +12,8 @@ export const SpreadsShowcaseSection: React.FC<SpreadsShowcaseSectionProps> = ({
   onNavigate,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const spreads = [
     {
@@ -37,15 +40,17 @@ export const SpreadsShowcaseSection: React.FC<SpreadsShowcaseSectionProps> = ({
   ]
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 font-sans">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-extrabold text-white tracking-tight flex items-center gap-1.5">
-          <Sparkles className="w-4 h-4 text-purple-400" />
+        <h3 className={`text-sm font-extrabold tracking-tight flex items-center gap-1.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          <Sparkles className={`w-4 h-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           <span>{t('spreads.title')}</span>
         </h3>
         <button
           onClick={() => onNavigate('spreads')}
-          className="text-xs font-bold text-purple-300 hover:text-purple-200 flex items-center gap-0.5"
+          className={`text-xs font-bold flex items-center gap-0.5 transition-colors ${
+            isDark ? 'text-purple-300 hover:text-purple-200' : 'text-purple-600 hover:text-purple-800'
+          }`}
         >
           <span>{t('spreads.exploreAll', 'Explore All Spreads')}</span>
           <ArrowRight className="w-4 h-4" />
@@ -57,20 +62,30 @@ export const SpreadsShowcaseSection: React.FC<SpreadsShowcaseSectionProps> = ({
           <CardBase
             key={sp.id}
             onClick={() => onNavigate('spreads')}
-            className="p-4 flex flex-col justify-between space-y-3 border-[0.5px] border-purple-500/20"
+            className={`p-4 flex flex-col justify-between space-y-3 border-[0.5px] ${
+              isDark ? 'border-purple-500/20' : 'border-slate-200'
+            }`}
           >
             <div className="flex items-center justify-between">
               <div className={`p-2 rounded-xl ${sp.color}`}>
                 <Layers className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold text-purple-200 bg-purple-950/60 border border-purple-500/30 px-2 py-0.5 rounded-full">
+              <span
+                className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                  isDark
+                    ? 'text-purple-200 bg-purple-950/60 border-purple-500/30'
+                    : 'text-purple-700 bg-purple-100 border-purple-300'
+                }`}
+              >
                 {sp.count}
               </span>
             </div>
 
             <div>
-              <h4 className="text-sm font-black text-white">{sp.title}</h4>
-              <p className="text-xs text-purple-200/80 mt-0.5 line-clamp-2">{sp.desc}</p>
+              <h4 className={`text-sm font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>{sp.title}</h4>
+              <p className={`text-xs mt-0.5 line-clamp-2 ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
+                {sp.desc}
+              </p>
             </div>
           </CardBase>
         ))}
