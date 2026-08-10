@@ -14,15 +14,15 @@ export const CategorySegmentedPillBar: React.FC<CategorySegmentedPillBarProps> =
   const { t } = useTranslation()
 
   const categories = [
-    { id: 'daily', label: t('nav.daily'), icon: Sun, color: 'bg-rose-500 text-white' },
-    { id: 'learn', label: t('nav.learn'), icon: BookOpen, color: 'bg-purple-600 text-white' },
-    { id: 'spreads', label: t('nav.spreads'), icon: Sparkles, color: 'bg-indigo-600 text-white' },
-    { id: 'oracle', label: t('nav.oracle'), icon: Wand2, color: 'bg-teal-600 text-white' },
-    { id: 'player', label: t('nav.player'), icon: Music, color: 'bg-sky-600 text-white' },
+    { id: 'daily', label: t('nav.daily'), icon: Sun },
+    { id: 'learn', label: t('nav.learn'), icon: BookOpen },
+    { id: 'spreads', label: t('nav.spreads'), icon: Sparkles },
+    { id: 'oracle', label: t('nav.oracle'), icon: Wand2 },
+    { id: 'player', label: t('nav.player'), icon: Music },
   ]
 
   return (
-    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1.5 font-sans">
       {categories.map((cat) => {
         const Icon = cat.icon
         const isActive = activeTab === cat.id
@@ -30,13 +30,13 @@ export const CategorySegmentedPillBar: React.FC<CategorySegmentedPillBarProps> =
           <button
             key={cat.id}
             onClick={() => onNavigate(cat.id)}
-            className={`flex items-center gap-2 px-4 py-3 rounded-2xl text-xs font-extrabold whitespace-nowrap shadow-sm transition-all duration-200 active:scale-95 border-[0.5px] ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-black whitespace-nowrap transition-all duration-200 active:scale-95 border backdrop-blur-md cursor-pointer ${
               isActive
-                ? `${cat.color} border-transparent shadow-md scale-105`
-                : 'bg-slate-900/80 text-purple-200/90 border-purple-500/30 hover:bg-slate-800/80 hover:text-white'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-amber-300 border-purple-300/80 shadow-[0_0_20px_rgba(168,85,247,0.6)] scale-105'
+                : 'bg-purple-950/70 text-purple-200/90 border-purple-500/40 hover:bg-purple-900/70 hover:text-white shadow-sm'
             }`}
           >
-            <Icon className="w-4 h-4" />
+            <Icon className={`w-4 h-4 ${isActive ? 'text-amber-300' : 'text-purple-300'}`} />
             <span>{cat.label}</span>
           </button>
         )
