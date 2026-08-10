@@ -2,6 +2,42 @@ class SoundService {
   private audioCtx: AudioContext | null = null
   private ambientInterval: any = null
   private activeTrackId: string | null = null
+  private isUnlocked = false
+
+  constructor() {
+    if (typeof window !== 'undefined') {
+      const unlock = () => {
+        this.unlockAudioOnUserInteraction()
+        if (this.isUnlocked) {
+          window.removeEventListener('touchstart', unlock)
+          window.removeEventListener('touchend', unlock)
+          window.removeEventListener('click', unlock)
+        }
+      }
+      window.addEventListener('touchstart', unlock, { passive: true })
+      window.addEventListener('touchend', unlock, { passive: true })
+      window.addEventListener('click', unlock, { passive: true })
+    }
+  }
+
+  public unlockAudioOnUserInteraction(): void {
+    try {
+      const ctx = this.getAudioContext()
+      if (!ctx) return
+      if (ctx.state === 'suspended') {
+        ctx.resume()
+      }
+      // Play 1-sample silent buffer to unlock iOS Safari & Capacitor WebAudio
+      const buffer = ctx.createBuffer(1, 1, 22050)
+      const source = ctx.createBufferSource()
+      source.buffer = buffer
+      source.connect(ctx.destination)
+      source.start(0)
+      this.isUnlocked = true
+    } catch (e) {
+      console.warn('[SoundService] Audio unlock error:', e)
+    }
+  }
 
   private getAudioContext(): AudioContext | null {
     if (typeof window === 'undefined') return null
@@ -19,6 +55,7 @@ class SoundService {
 
   public playCardFlip(): void {
     try {
+      this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
       if (!ctx) return
 
@@ -44,6 +81,7 @@ class SoundService {
 
   public playMysticChime(): void {
     try {
+      this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
       if (!ctx) return
 
@@ -71,6 +109,7 @@ class SoundService {
 
   public playClick(): void {
     try {
+      this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
       if (!ctx) return
 
@@ -99,6 +138,7 @@ class SoundService {
    */
   public triggerRelaxingBellStrike(freq: number): void {
     try {
+      this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
       if (!ctx) return
 
@@ -137,6 +177,7 @@ class SoundService {
   }
 
   public startAmbientLoop(trackId: string, baseFreq: number): void {
+    this.unlockAudioOnUserInteraction()
     this.stopAmbientLoop()
     this.activeTrackId = trackId
 
