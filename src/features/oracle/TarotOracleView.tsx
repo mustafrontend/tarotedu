@@ -86,14 +86,14 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
           }}
           placeholder={t('oracle.promptPlaceholder')}
           rows={3}
-          className={`w-full p-3 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
+          className={`w-full p-3.5 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
             validationError
               ? isDark
                 ? 'border-rose-500/80 bg-rose-950/20 focus:border-rose-400 text-white'
                 : 'border-rose-500 bg-rose-50 focus:border-rose-600 text-slate-900'
               : isDark
               ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
-              : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
+              : 'bg-slate-100/80 border-slate-300 text-slate-900 placeholder-slate-500 focus:bg-white focus:border-purple-600 shadow-inner'
           }`}
         />
 
@@ -113,7 +113,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
         )}
 
         <div className="flex justify-between items-center">
-          <span className={`text-[11px] font-medium ${isDark ? 'text-purple-200/70' : 'text-slate-500'}`}>
+          <span className={`text-[11px] font-medium ${isDark ? 'text-purple-200/70' : 'text-slate-600'}`}>
             {t('oracle.helperHint')}
           </span>
           <Button
