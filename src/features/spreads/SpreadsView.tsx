@@ -36,6 +36,8 @@ const SPREADS_CONFIG: Record<
 export const SpreadsView: React.FC<SpreadsViewProps> = ({ onOpenPaywall }) => {
   const { t } = useTranslation()
   const addReading = useTarotStore((state) => state.addReading)
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const [activeSpread, setActiveSpread] = useState<SpreadType>('three-card')
   const [drawnCards, setDrawnCards] = useState<ReadingCard[]>([])
@@ -73,9 +75,6 @@ export const SpreadsView: React.FC<SpreadsViewProps> = ({ onOpenPaywall }) => {
     setIsReadingComplete(false)
   }
 
-  const theme = useTarotStore((state) => state.theme)
-  const isDark = theme === 'dark'
-
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
@@ -111,6 +110,7 @@ export const SpreadsView: React.FC<SpreadsViewProps> = ({ onOpenPaywall }) => {
           drawnCards={drawnCards}
           spreadTitle={t(currentConfig.nameKey)}
           onReset={handleReset}
+          onOpenPaywall={onOpenPaywall}
         />
       )}
     </div>

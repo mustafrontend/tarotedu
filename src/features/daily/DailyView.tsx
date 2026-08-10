@@ -4,10 +4,13 @@ import { Sun } from 'lucide-react'
 import { DailyCardResult } from './components/DailyCardResult'
 import { DailyIntentionForm } from './components/DailyIntentionForm'
 import { useDailyDraw } from './hooks/useDailyDraw'
-
 import { useTarotStore } from '../../store/tarotStore'
 
-export const DailyView: React.FC = () => {
+interface DailyViewProps {
+  onOpenPaywall?: () => void
+}
+
+export const DailyView: React.FC<DailyViewProps> = ({ onOpenPaywall }) => {
   const { t } = useTranslation()
   const theme = useTarotStore((state) => state.theme)
   const isDark = theme === 'dark'
@@ -60,6 +63,7 @@ export const DailyView: React.FC = () => {
             onJournalNoteChange={setJournalNote}
             onRedraw={handleRedraw}
             intention={intention}
+            onOpenPaywall={onOpenPaywall}
           />
         )
       )}

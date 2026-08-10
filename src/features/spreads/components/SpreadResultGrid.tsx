@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { RefreshCw, Sparkles, Loader2, Bot } from 'lucide-react'
+import { RefreshCw, Sparkles, Loader2, Bot, Crown } from 'lucide-react'
 import { ReadingCard } from '../../../types/tarot'
 import { Button } from '../../../components/atoms/Button'
 import { CardBase } from '../../../components/atoms/CardBase'
@@ -12,14 +12,17 @@ interface SpreadResultGridProps {
   drawnCards: ReadingCard[]
   spreadTitle?: string
   onReset: () => void
+  onOpenPaywall?: () => void
 }
 
 export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
   drawnCards,
   spreadTitle,
   onReset,
+  onOpenPaywall,
 }) => {
   const { t } = useTranslation()
+  const isPro = useTarotStore((state) => state.isPro)
   const theme = useTarotStore((state) => state.theme)
   const isDark = theme === 'dark'
 
@@ -28,6 +31,10 @@ export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
   const [isLoadingAi, setIsLoadingAi] = useState(false)
 
   const handleGetAiMasterclass = async () => {
+    if (!isPro) {
+      onOpenPaywall?.()
+      return
+    }
     setIsLoadingAi(true)
     const formattedCards = drawnCards.map((rc) => ({
       position: t(`spreads.positions.${rc.positionName}`, rc.positionName),
@@ -47,11 +54,7 @@ export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
   return (
     <div className="space-y-6 font-sans">
       <div className="flex justify-between items-center">
-        <h3
-          className={`text-sm font-bold uppercase tracking-wider ${
-            isDark ? 'text-amber-300' : 'text-purple-900'
-          }`}
-        >
+        <h3 className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-amber-300' : 'text-purple-900'}`}>
           {t('spreads.readingLayout', { count: drawnCards.length })}
         </h3>
         <Button variant="outline" size="sm" onClick={onReset}>
@@ -69,11 +72,7 @@ export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
       <CardBase hoverEffect={false} className="p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h4
-              className={`text-sm font-bold flex items-center gap-2 ${
-                isDark ? 'text-amber-300' : 'text-purple-950'
-              }`}
-            >
+            <h4 className={`text-sm font-bold flex items-center gap-2 ${isDark ? 'text-amber-300' : 'text-purple-950'}`}>
               <Bot className="w-4 h-4 text-purple-400" />
               AI Masterclass Tarot Analizi
             </h4>
@@ -81,14 +80,10 @@ export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
               Kartların arasındaki gizli esoterik bağı ve sinerjiyi AI Mistik Rehber ile çöz.
             </p>
           </div>
-          <Button
-            variant="mystic"
-            size="sm"
-            onClick={handleGetAiMasterclass}
-            disabled={isLoadingAi}
-            className="shrink-0"
-          >
-            {isLoadingAi ? (
+          <Button variant="mystic" size="sm" onClick={handleGetAiMasterclass} disabled={isLoadingAi} className="shrink-0">
+            {!isPro ? (
+              <Crown className="w-4 h-4 mr-1.5 text-amber-300" />
+            ) : isLoadingAi ? (
               <Loader2 className="w-4 h-4 mr-1.5 animate-spin text-amber-300" />
             ) : (
               <Sparkles className="w-4 h-4 mr-1.5 text-amber-300" />
@@ -103,23 +98,15 @@ export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
           onChange={(e) => setUserQuestion(e.target.value)}
           placeholder="Özel bir sorunuz veya odaklanmak istediğiniz konu var mı? (İsteğe bağlı)"
           className={`w-full p-3 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
-            isDark
-              ? 'bg-slate-900/80 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
-              : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:bg-white shadow-sm'
+            isDark ? 'bg-slate-900/80 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:bg-white shadow-sm'
           }`}
         />
 
         {aiInterpretation && (
-          <div
-            className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-2 whitespace-pre-line ${
-              isDark
-                ? 'bg-slate-900/90 border-purple-500/40 text-purple-100'
-                : 'bg-purple-50 border-purple-200 text-slate-800'
-            }`}
-          >
-            <h5 className={`font-bold text-sm ${isDark ? 'text-amber-300' : 'text-purple-900'}`}>
-              🌟 AI Masterclass Sentez Yorumu
-            </h5>
+          <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-2 whitespace-pre-line ${
+            isDark ? 'bg-slate-900/90 border-purple-500/40 text-purple-100' : 'bg-purple-50 border-purple-200 text-slate-800'
+          }`}>
+            <h5 className={`font-bold text-sm ${isDark ? 'text-amber-300' : 'text-purple-900'}`}>🌟 AI Masterclass Sentez Yorumu</h5>
             <div>{aiInterpretation}</div>
           </div>
         )}

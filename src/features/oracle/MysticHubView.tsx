@@ -4,13 +4,12 @@ import { Sun, Sparkles, Wand2 } from 'lucide-react'
 import { DailyView } from '../daily/DailyView'
 import { SpreadsView } from '../spreads/SpreadsView'
 import { TarotOracleView } from './TarotOracleView'
+import { useTarotStore } from '../../store/tarotStore'
 
 interface MysticHubViewProps {
   onOpenPaywall: () => void
   initialSubTab?: 'daily' | 'spreads' | 'oracle'
 }
-
-import { useTarotStore } from '../../store/tarotStore'
 
 export const MysticHubView: React.FC<MysticHubViewProps> = ({
   onOpenPaywall,
@@ -56,8 +55,8 @@ export const MysticHubView: React.FC<MysticHubViewProps> = ({
       </div>
 
       {/* Render Active View */}
-      {subTab === 'daily' && <DailyView />}
-      {subTab === 'spreads' && <SpreadsView />}
+      {subTab === 'daily' && <DailyView onOpenPaywall={onOpenPaywall} />}
+      {subTab === 'spreads' && <SpreadsView onOpenPaywall={onOpenPaywall} />}
       {subTab === 'oracle' && <TarotOracleView onOpenPaywall={onOpenPaywall} />}
     </div>
   )

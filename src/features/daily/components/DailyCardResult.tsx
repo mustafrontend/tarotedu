@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Sparkles, Bot, Loader2 } from 'lucide-react'
+import { Sparkles, Bot, Loader2, Crown } from 'lucide-react'
 import { TarotCard, CardPosition } from '../../../types/tarot'
 import { DailyCardVisual } from './DailyCardVisual'
 import { DailyCardMeaningSection } from './DailyCardMeaningSection'
@@ -17,6 +17,7 @@ interface DailyCardResultProps {
   onJournalNoteChange: (note: string) => void
   onRedraw: () => void
   intention?: string
+  onOpenPaywall?: () => void
 }
 
 export const DailyCardResult: React.FC<DailyCardResultProps> = ({
@@ -26,8 +27,10 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
   onJournalNoteChange,
   onRedraw,
   intention = '',
+  onOpenPaywall,
 }) => {
   const { t } = useTranslation()
+  const isPro = useTarotStore((state) => state.isPro)
   const theme = useTarotStore((state) => state.theme)
   const isDark = theme === 'dark'
 
@@ -45,6 +48,10 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
   const localizedGuidance = t(`cards.${drawnCard.id}.guidance`, drawnCard.guidance)
 
   const handleGetAiReading = async () => {
+    if (!isPro) {
+      onOpenPaywall?.()
+      return
+    }
     setIsLoadingAi(true)
     const answers = [
       mindQuestion.trim() ? `Zihnim: ${mindQuestion.trim()}` : '',
@@ -76,10 +83,18 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
       </div>
 
       <CardBase hoverEffect={false} className="space-y-4 p-5">
-        <h4 className={`text-sm font-bold flex items-center gap-2 ${isDark ? 'text-amber-300' : 'text-purple-950'}`}>
-          <Bot className="w-4 h-4 text-purple-400" />
-          Mistik Yansıma & AI Rehberliği
-        </h4>
+        <div className="flex items-center justify-between">
+          <h4 className={`text-sm font-bold flex items-center gap-2 ${isDark ? 'text-amber-300' : 'text-purple-950'}`}>
+            <Bot className="w-4 h-4 text-purple-400" />
+            Mistik Yansıma & AI Rehberliği
+          </h4>
+          {!isPro && (
+            <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+              <Crown className="w-3 h-3 fill-current" />
+              <span>PRO Ayrıcalığı</span>
+            </span>
+          )}
+        </div>
         <p className={`text-xs font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
           Kartın sana özel mesajını derinleştirmek için aşağıdaki soruları yanıtla:
         </p>
@@ -104,7 +119,13 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
           />
         </div>
         <Button variant="mystic" size="sm" onClick={handleGetAiReading} disabled={isLoadingAi} className="w-full justify-center">
-          {isLoadingAi ? <Loader2 className="w-4 h-4 mr-2 animate-spin text-amber-300" /> : <Sparkles className="w-4 h-4 mr-2 text-amber-300" />}
+          {!isPro ? (
+            <Crown className="w-4 h-4 mr-2 text-amber-300" />
+          ) : isLoadingAi ? (
+            <Loader2 className="w-4 h-4 mr-2 animate-spin text-amber-300" />
+          ) : (
+            <Sparkles className="w-4 h-4 mr-2 text-amber-300" />
+          )}
           <span>🤖 AI Mistik Günlük Yorum Al</span>
         </Button>
 
