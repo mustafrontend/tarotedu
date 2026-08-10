@@ -17,9 +17,7 @@ workflows:
       - name: Build Web Assets & Capacitor Sync
         script: |
           npm run build
-          npx cap add ios || true
           npx cap sync ios
-          cd ios/App && pod install
       - name: Set up code signing
         script: |
           keychain initialize
