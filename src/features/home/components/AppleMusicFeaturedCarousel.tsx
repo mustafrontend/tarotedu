@@ -61,12 +61,12 @@ export const AppleMusicFeaturedCarousel: React.FC<AppleMusicFeaturedCarouselProp
             >
               {/* Media Background */}
               <div className="h-52 w-full relative overflow-hidden bg-slate-950">
-                <img
-                  src={card.image}
-                  alt={localizedName}
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-                />
+                <div className="w-full h-full bg-gradient-to-tr from-purple-950 via-indigo-950 to-slate-950 p-4 flex items-center justify-center">
+                  <div className="text-center space-y-1">
+                    <span className="text-4xl font-black text-amber-300/80 block font-mono">#{card.number}</span>
+                    <Sparkles className="w-6 h-6 text-purple-300 animate-pulse mx-auto opacity-70" />
+                  </div>
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
                 {/* Content Overlay */}

@@ -54,13 +54,8 @@ export const AppleCardListSection: React.FC<AppleCardListSectionProps> = ({
             >
               <div className="flex items-center gap-3.5 min-w-0">
                 {/* Square Media Thumbnail */}
-                <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-purple-400/40 overflow-hidden shrink-0 relative shadow-md">
-                  <img
-                    src={card.image}
-                    alt={localizedName}
-                    loading="lazy"
-                    className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform"
-                  />
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-950 via-indigo-950 to-slate-950 border border-purple-400/40 overflow-hidden shrink-0 relative shadow-md flex items-center justify-center">
+                  <span className="text-xs font-mono font-black text-amber-300">#{card.number}</span>
                   <div className="absolute inset-0 bg-slate-950/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <Play className="w-4 h-4 text-white fill-current" />
                   </div>
