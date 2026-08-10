@@ -66,7 +66,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
           className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-amber-300 text-xs font-black shadow-md border border-purple-400/40 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
         >
           <Moon className="w-4 h-4 fill-current" />
-          <span>🌙 AI Rüya Analizi</span>
+          <span>{t('oracle.aiDreamAnalysisBtn', '🌙 AI Rüya Analizi')}</span>
         </button>
       </div>
 

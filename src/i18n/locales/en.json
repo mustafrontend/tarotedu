@@ -206,6 +206,7 @@
     "analyzing": "Aligning card energy...",
     "homeDesc": "Ask any question to receive instant card guidance.",
     "helperHint": "Ask about love, career, or personal destiny",
+    "aiDreamAnalysisBtn": "🌙 AI Dream Interpreter",
     "answerTemplate": "The Ancient Tarot Oracle reveals {{cardName}} for your query. Guidance: {{guidance}} Key theme: {{theme}}"
   },
   "player": {
@@ -533,5 +534,37 @@
     "homeDesc": "Elevate your meditation with ambient Solfeggio tones.",
     "freeBadge": "FREE",
     "loopActive": "Continuous Loop Active"
+  },
+  "shadow": {
+    "title": "Jungian Shadow Mirror",
+    "subtitle": "Unveil your conscious Persona and subconscious Shadow archetypes",
+    "draw": "Dual Draw",
+    "redraw": "Redraw",
+    "startTitle": "Reflect Your Inner Psyche",
+    "startDesc": "Draw dual cards to illuminate the balance between public Persona and hidden Shadow.",
+    "drawDualBtn": "Draw Persona & Shadow",
+    "personaLabel": "🎭 Persona (Conscious Self)",
+    "shadowLabel": "🌑 Shadow (Subconscious Self)",
+    "notesLabel": "Subconscious Journal / Context (Optional)",
+    "notesPlaceholder": "What hidden emotions, fears, or repeating dreams are on your mind?",
+    "illuminateBtn": "Illuminate Subconscious Mirror Insight",
+    "insightTitle": "Jungian Mirror Insights"
+  },
+  "synastry": {
+    "title": "Arcana Synastry Matrix",
+    "subtitle": "Relational Alchemy, Soul Contracts & Elemental Compatibility",
+    "randomize": "Shuffle Cards",
+    "elementalTitle": "Elemental Balance Breakdown",
+    "synergy": "Synergy",
+    "alchemyFormula": "Alchemical Reaction",
+    "fire": "Fire",
+    "water": "Water",
+    "air": "Air",
+    "earth": "Earth",
+    "analyzing": "Synthesizing Soul Contract...",
+    "analyzeBtn": "Analyze Relational Alchemy & Soul Contract",
+    "resultTitle": "Relational Alchemy & Soul Contract",
+    "recalculate": "Recalculate",
+    "share": "Share Analysis"
   }
 }

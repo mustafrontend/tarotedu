@@ -427,6 +427,7 @@
     "analyzing": "Kart enerjileri hizalanıyor...",
     "homeDesc": "Anında kart rehberliği almak için sorunuzu sorun.",
     "helperHint": "Aşk, kariyer veya kişisel kaderiniz hakkında sorun",
+    "aiDreamAnalysisBtn": "🌙 AI Rüya Analizi",
     "answerTemplate": "Kadim Tarot Kehaneti sorunuz için {{cardName}} kartını gösteriyor. Rehberlik: {{guidance}} Ana Tema: {{theme}}"
   },
   "player": {
@@ -518,5 +519,37 @@
     "resultTitle": "✨ Mistik Rüya & Arketip Analizi",
     "errorMsg": "Lütfen rüya metnini girin ve bir rehber kartı çekin.",
     "newAnalysisBtn": "Yeni Rüya Analizi"
+  },
+  "shadow": {
+    "title": "Jungian Gölge Aynası",
+    "subtitle": "Bilinçli Persona ve bilinçdışı Gölge arketiplerinizi açığa çıkarın",
+    "draw": "Çift Kart Çek",
+    "redraw": "Yeniden Çek",
+    "startTitle": "İçsel Ruhsal Yapınızı Yansıtın",
+    "startDesc": "Toplumsal Persona ile gizli Gölge arasındaki dengeyi aydınlatmak için iki kart çekin.",
+    "drawDualBtn": "Persona & Gölge Kartı Çek",
+    "personaLabel": "🎭 Persona (Bilinçli Benlik)",
+    "shadowLabel": "🌑 Gölge (Bilinçdışı Benlik)",
+    "notesLabel": "Bilinçaltı Günlüğü / Tefekkür (İsteğe Bağlı)",
+    "notesPlaceholder": "Aklınızdaki gizli korkular, bastırılmış duygular veya tekrarlayan rüyalar neler?",
+    "illuminateBtn": "Bilinçaltı Ayna Analizini Başlat",
+    "insightTitle": "Jungian Ayna Yorumu"
+  },
+  "synastry": {
+    "title": "Arkana Sinastri Matrisi",
+    "subtitle": "İlişkisel Simya, Ruhsal Sözleşmeler & Elementel Uyum",
+    "randomize": "Kartları Karıştır",
+    "elementalTitle": "Elementel Denge Analizi",
+    "synergy": "Sinerji",
+    "alchemyFormula": "Simyasal Tepkime",
+    "fire": "Ateş",
+    "water": "Su",
+    "air": "Hava",
+    "earth": "Toprak",
+    "analyzing": "Ruhsal Sözleşme Analiz Ediliyor...",
+    "analyzeBtn": "İlişkisel Simya & Ruh Sözleşmesini Analiz Et",
+    "resultTitle": "İlişkisel Simya & Ruh Sözleşmesi",
+    "recalculate": "Yeniden Hesapla",
+    "share": "Analizi Paylaş"
   }
 }

@@ -125,4 +125,45 @@ ${cardDetails}
 `
     return callGemini(prompt)
   },
+
+  async getAstroTarotSync(planetTransit: string, tarotCard: string, userFocus?: string): Promise<string> {
+    const prompt = `
+[ASTRO TAROT SYNC & GEZEGENSEL TRANSİT SENTEZİ]
+- Gezegensel Transit / Konum: ${planetTransit}
+- İlişkili Tarot Kartı: ${tarotCard}
+- Kullanıcı Odak / Niyeti: ${userFocus || 'Astrolojik uyum ve günlük tefekkür'}
+`
+    return callGemini(prompt)
+  },
+
+  async getShadowWorkReading(personaCardName: string, shadowCardName: string, notes?: string): Promise<string> {
+    const prompt = `
+[JUNGIAN SHADOW WORK & PERSONA MIRROR ANALİZİ]
+- Persona Kartı (Bilinçli Dış Benlik/Maske): ${personaCardName}
+- Shadow Kartı (Bilinçdışı Gölge Benlik/Gizli Potansiyel): ${shadowCardName}
+- Kullanıcı Notu/Tefekkürü: "${notes || 'Gölge benliği anlama ve arketipsel entegrasyon'}"
+`
+    return callGemini(prompt)
+  },
+
+  async getSynastryAnalysis(
+    card1Name: string,
+    card2Name: string,
+    person1Name?: string,
+    person2Name?: string,
+    relationshipType?: string
+  ): Promise<string> {
+    const prompt = `
+[ARKANA SİNASTRİ, RELATIONAL ALCHEMY VE SOUL CONTRACT ANALİZİ]
+- 1. Partner (${person1Name || 'Partner A'}): ${card1Name}
+- 2. Partner (${person2Name || 'Partner B'}): ${card2Name}
+- İlişki Bağı/Tür: ${relationshipType || 'Aşk & Ruhsal Simya'}
+
+Lütfen bu iki arketipsel tarot kartının enerjisel sinastrisini detaylıca analiz et:
+1. 🧪 **Relational Alchemy (İlişkisel Simya & Dönüşüm)**: İki kartın bir araya geldiğinde ortaya çıkardığı simyasal element, enerji sinerjisi ve dönüşüm gücü.
+2. 📜 **Soul Contract (Ruhsal Sözleşme & Karmik Bağ)**: Ruhların birbirine vaat ettiği evrensel dersler, karmik bağ ve ortak tekamül hedefi.
+3. 🔮 **Kozmik Uyum & Gelişim Tavsiyesi**: İlişkideki muhtemel zorlukları aşmak ve frekansı yükseltmek için 2 somut spiritüel öneri.
+`
+    return callGemini(prompt)
+  },
 }
