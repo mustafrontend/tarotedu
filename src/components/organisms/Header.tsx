@@ -21,8 +21,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenPaywall }) => {
   return (
     <>
       <header
-        style={{ paddingTop: 'max(52px, calc(env(safe-area-inset-top, 0px) + 10px))' }}
-        className={`sticky top-0 z-40 backdrop-blur-md px-4 pb-3 font-sans transition-colors ${
+        style={{ paddingTop: 'max(58px, calc(env(safe-area-inset-top, 0px) + 16px))' }}
+        className={`sticky top-0 z-40 backdrop-blur-md px-4 pb-3 font-sans transition-colors overflow-hidden max-w-full ${
         isDark
           ? 'bg-slate-950/90 border-b-[0.5px] border-purple-900/40 text-white shadow-lg'
           : 'bg-white/95 border-b border-slate-200 text-slate-900 shadow-sm'

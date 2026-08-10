@@ -102,13 +102,13 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen font-sans flex flex-col selection:bg-purple-700 selection:text-white transition-colors duration-200 ${
+      className={`min-h-screen font-sans flex flex-col selection:bg-purple-700 selection:text-white transition-colors duration-200 overflow-x-hidden w-full max-w-full relative ${
         isDark ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'
       }`}
     >
       <Header onOpenPaywall={() => setIsPaywallOpen(true)} />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 pt-4 pb-24">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 pt-4 pb-24 overflow-x-hidden">
         {renderView()}
       </main>
 
