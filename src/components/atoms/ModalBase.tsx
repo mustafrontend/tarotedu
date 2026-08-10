@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useTarotStore } from '../../store/tarotStore'
@@ -21,6 +21,17 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
   const theme = useTarotStore((state) => state.theme)
   const isDark = theme === 'dark'
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   const maxWidthClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
@@ -31,7 +42,7 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -45,15 +56,15 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className={`relative w-full ${maxWidthClasses[maxWidth]} rounded-3xl shadow-2xl backdrop-blur-2xl overflow-hidden z-10 p-6 font-sans border transition-colors ${
+            className={`relative w-full ${maxWidthClasses[maxWidth]} max-h-[88vh] overflow-y-auto rounded-3xl shadow-2xl backdrop-blur-2xl z-10 p-5 sm:p-6 font-sans border transition-colors ${
               isDark
                 ? 'bg-slate-950/95 text-white border-purple-500/40'
                 : 'bg-white text-slate-900 border-slate-200 shadow-2xl'
             }`}
           >
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 sticky top-0 bg-transparent z-10">
               {title ? (
-                <h3 className={`text-lg font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`text-base sm:text-lg font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   {title}
                 </h3>
               ) : (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Crown, CheckCircle2, ShieldCheck, X } from 'lucide-react'
@@ -17,6 +17,17 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
   const setIsPro = useTarotStore((state) => state.setIsPro)
   const [selectedPlan, setSelectedPlan] = useState<'annual' | 'monthly' | 'lifetime'>('annual')
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -59,7 +70,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto font-sans">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden font-sans">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -73,11 +84,11 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-lg bg-slate-950/95 text-white rounded-3xl shadow-2xl border-[0.5px] border-purple-500/40 backdrop-blur-2xl overflow-hidden z-10 p-6 sm:p-7"
+          className="relative w-full max-w-lg max-h-[88vh] overflow-y-auto bg-slate-950/95 text-white rounded-3xl shadow-2xl border-[0.5px] border-purple-500/40 backdrop-blur-2xl z-10 p-5 sm:p-7"
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full text-purple-300 hover:text-white hover:bg-purple-900/40 transition-colors"
+            className="absolute top-4 right-4 p-2 rounded-full text-purple-300 hover:text-white hover:bg-purple-900/40 transition-colors z-20"
           >
             <X className="w-5 h-5" />
           </button>
