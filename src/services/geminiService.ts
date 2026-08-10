@@ -1,24 +1,46 @@
 // Google Gemini AI Live Integration Service for TarotEdu PRO
+import i18n from '../i18n'
+
 const KEY_PARTS = ['AQ.Ab8RN6K5Vct', 'AqZLKsFXEeIzJqxGz', '_n0L-0170MhOKPrxkGG94Q']
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || KEY_PARTS.join('')
+const GEMINI_API_KEY = (import.meta as any).env?.VITE_GEMINI_API_KEY || KEY_PARTS.join('')
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent'
+
+const LANGUAGE_NAMES: Record<string, string> = {
+  tr: 'Türkçe (Turkish)',
+  en: 'English',
+  de: 'Deutsch (German)',
+  fr: 'Français (French)',
+  es: 'Español (Spanish)',
+  it: 'Italiano (Italian)',
+  pt: 'Português (Portuguese)',
+  ru: 'Русский (Russian)',
+  ja: '日本語 (Japanese)',
+  ko: '한국어 (Korean)',
+  zh: '中文 (Chinese)',
+  ar: 'العربية (Arabic)',
+}
 
 const ESOTERIC_SYSTEM_PROMPT = `
 Sen TarotEdu PRO'nun kadim ve bilge Mistik Tarot Rehberisin (Esoteric AI Tarot Master).
-Dilin: Şefkatli, gizemli, derin, ilham verici ve şiirsel fakat son derece net ve pratik tavsiyeler içeren Türkçe.
 Amacın: Kullanıcının çektiği tarot kartlarını, ruh halini ve sorduğu soruları en derin arketipsel, esoterik ve psikolojik (Jungian) boyutlarıyla yorumlamak.
 
 Kuralların:
-1. Kullanıcıya "Sevgili Arayışçı" veya "Sevgili Ruh Dostum" diye hitap et.
-2. Tarot kartlarının sadece kehanet değil, öz farkındalık ve kişisel dönüşüm aynası olduğunu vurgula.
-3. Yanıtlarında 3 net bölüm oluştur:
+1. Tarot kartlarının sadece kehanet değil, öz farkındalık ve kişisel dönüşüm aynası olduğunu vurgula.
+2. Yanıtlarında 3 net bölüm oluştur:
    - 🌟 **Kartın Esoterik Mesajı & Enerjisi**
    - 🔮 **Ruhuna ve Durumuna Özel Yorum**
    - 💡 **Bugün İçin Eylem & Meditasyon Önerisi** (2 adet somut adım ve 1 derin tefekkür sorusu).
 `
 
+function getActiveLanguagePrompt(): string {
+  const currentLang = i18n.language || i18n.resolvedLanguage || 'tr'
+  const langName = LANGUAGE_NAMES[currentLang] || 'Türkçe (Turkish)'
+  return `IMPORTANT INSTRUCTION: You MUST generate your ENTIRE response in ${langName}. Write all section headings, esoteric interpretations, and practical advice natively in ${langName}.`
+}
+
 async function callGemini(promptText: string): Promise<string> {
   try {
+    const langPrompt = getActiveLanguagePrompt()
     const response = await fetch(`${GEMINI_API_URL}`, {
       method: 'POST',
       headers: {
@@ -30,7 +52,7 @@ async function callGemini(promptText: string): Promise<string> {
           {
             parts: [
               {
-                text: `${ESOTERIC_SYSTEM_PROMPT}\n\n${promptText}`,
+                text: `${ESOTERIC_SYSTEM_PROMPT}\n\n${langPrompt}\n\n${promptText}`,
               },
             ],
           },
@@ -52,7 +74,6 @@ async function callGemini(promptText: string): Promise<string> {
 }
 
 export const geminiService = {
-  // Günün Kartı İçin Derin AI Yorumu & Özel Soru Analizi
   async getDailyReading(
     cardName: string,
     isReversed: boolean,
@@ -63,14 +84,11 @@ export const geminiService = {
 [GÜNÜN KARTINI YORUMLA]
 - Çekilen Kart: ${cardName} (${isReversed ? 'Ters Konum' : 'Dik Konum'})
 - Kullanıcının Bugünkü Niyeti/Sorusu: ${intention || 'Genel gün rehberliği'}
-- Kullanıcının Ruh Halı ve Yanıtları: ${reflectionAnswers || 'Belirtilmedi'}
-
-Lütfen bu kartın bugünkü enerjisini kullanıcı için özel olarak analiz et. Kullanıcının niyetine odaklan, ona rehberlik et ve gün içinde dikkat etmesi gereken 2 somut tavsiye ver.
+- Kullanıcının Ruh Hali ve Yanıtları: ${reflectionAnswers || 'Belirtilmedi'}
 `
     return callGemini(prompt)
   },
 
-  // Açılımlar (3 Kart / Aşk / Kariyer / Çeltik) İçin Derin AI Yorumu
   async getSpreadReading(
     spreadTitle: string,
     cards: Array<{ position: string; cardName: string; isReversed: boolean }>,
@@ -86,32 +104,24 @@ Lütfen bu kartın bugünkü enerjisini kullanıcı için özel olarak analiz et
 - Kullanıcının Sorusu/Niyeti: ${question || 'Genel hayat rehberliği'}
 - Çekilen Kartlar:
 ${cardDetails}
-
-Lütfen bu kartların birbiriyle olan sinerjisini, geçmiş-şimdiki zaman-gelecek bağlamını ve kullanıcının sorusuna en derin cevabı sentezleyerek yorumla.
 `
     return callGemini(prompt)
   },
 
-  // Mistik Kehanet (Tarot Oracle) Canlı AI Cevabı
   async getOracleAnswer(userQuestion: string, cardName: string): Promise<string> {
     const prompt = `
 [MİSTİK KEHANET & KEHANET SORUSU]
 - Kullanıcının Sorusu: "${userQuestion}"
 - Evrenin Cevap Olarak Çektiği Kart: ${cardName}
-
-Bu soruya çekilen kartın esoterik bilgeliğiyle derin, aydınlatıcı, içgörü dolu ve doğrudan yanıt ver.
 `
     return callGemini(prompt)
   },
 
-  // Rüyalardan Tarot Kartı Çıkarma & AI Rüya Analizi
   async getDreamAnalysis(dreamDescription: string, drawnCardName: string): Promise<string> {
     const prompt = `
 [RÜYA VE TAROT ARKETİP SİNERJİSİ]
 - Kullanıcının Anlattığı Rüya: "${dreamDescription}"
 - Rüya İçin Çekilen Rehber Kart: ${drawnCardName}
-
-Lütfen rüyadaki bilinçaltı sembollerini Jungian psikolojisi ve bu tarot kartının sembolizmiyle harmanlayarak rüyanın gizli mesajını açıkla.
 `
     return callGemini(prompt)
   },
