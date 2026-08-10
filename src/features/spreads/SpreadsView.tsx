@@ -107,7 +107,11 @@ export const SpreadsView: React.FC<SpreadsViewProps> = ({ onOpenPaywall }) => {
           onDrawSpread={handleDrawSpread}
         />
       ) : (
-        <SpreadResultGrid drawnCards={drawnCards} onReset={handleReset} />
+        <SpreadResultGrid
+          drawnCards={drawnCards}
+          spreadTitle={t(currentConfig.nameKey)}
+          onReset={handleReset}
+        />
       )}
     </div>
   )

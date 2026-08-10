@@ -492,5 +492,18 @@
     "stepProgress": "Step {{current}} of {{total}}",
     "nextStep": "Next Step",
     "finish": "Finish"
+  },
+  "dreamTarot": {
+    "title": "🌙 AI Dream & Tarot Archetype Interpreter",
+    "subtitle": "Synthesize subconscious dream symbols with your Tarot archetype.",
+    "inputLabel": "Describe Your Dream in Detail",
+    "placeholder": "Last night I dreamed of flying over a deep blue ocean and discovering a golden lock...",
+    "drawCard": "🔮 Draw Guiding Tarot Card",
+    "drawnCard": "Drawn Guiding Card",
+    "analyzeBtn": "Interpret Dream & Archetype",
+    "analyzing": "Synthesizing subconscious symbols with tarot archetypes...",
+    "resultTitle": "✨ Mystic Dream & Archetype Analysis",
+    "errorMsg": "Please describe your dream and draw a guiding card.",
+    "newAnalysisBtn": "New Dream Analysis"
   }
 }

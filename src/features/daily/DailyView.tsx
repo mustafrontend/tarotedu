@@ -59,6 +59,7 @@ export const DailyView: React.FC = () => {
             journalNote={journalNote}
             onJournalNoteChange={setJournalNote}
             onRedraw={handleRedraw}
+            intention={intention}
           />
         )
       )}

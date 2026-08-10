@@ -491,5 +491,18 @@
     "stepProgress": "Adım {{current}} / {{total}}",
     "nextStep": "Sonraki Adım",
     "finish": "Tamamla"
+  },
+  "dreamTarot": {
+    "title": "🌙 Rüya Tabiri & Tarot Arketip Analizi",
+    "subtitle": "Rüyanızdaki bilinçaltı sembollerini Tarot arketipiniz ile sentezleyin.",
+    "inputLabel": "Rüyanızı Detaylıca Anlatın",
+    "placeholder": "Dün gece rüyamda derin mavi bir denizde uçuyordum ve altın bir kilit buldum...",
+    "drawCard": "🔮 Rehber Tarot Kartı Çek",
+    "drawnCard": "Çekilen Rehber Kart",
+    "analyzeBtn": "Rüya & Tarot Arketipini Çöz",
+    "analyzing": "Bilinçaltı sembolleri ve tarot arketipleri sentezleniyor...",
+    "resultTitle": "✨ Mistik Rüya & Arketip Analizi",
+    "errorMsg": "Lütfen rüya metnini girin ve bir rehber kartı çekin.",
+    "newAnalysisBtn": "Yeni Rüya Analizi"
   }
 }
