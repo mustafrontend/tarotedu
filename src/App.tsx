@@ -36,6 +36,22 @@ export default function App() {
     initializeRevenueCat()
     initializeNotifications()
     tarotApiService.notifyLogin('TarotEdu User')
+
+    const handleFocusOut = (e: FocusEvent) => {
+      if (
+        e.target &&
+        (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
+      ) {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+        }, 100)
+      }
+    }
+
+    document.addEventListener('focusout', handleFocusOut)
+    return () => {
+      document.removeEventListener('focusout', handleFocusOut)
+    }
   }, [onboardingCompleted])
 
   if (!mounted) return null

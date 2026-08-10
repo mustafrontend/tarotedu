@@ -20,6 +20,11 @@
       "androidSplashResourceName": "splash",
       "iosSpinnerStyle": "small",
       "spinnerColor": "#FBBF24"
+    },
+    "Keyboard": {
+      "resize": "body",
+      "style": "DARK",
+      "resizeOnFullScreen": true
     }
   }
 }
