@@ -48,9 +48,10 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
                 <Badge variant="purple">
                   {t('academy.majorArcana')} #{card.number}
                 </Badge>
-                {isFreeLesson ? (
-                  <Badge variant="emerald">Ders 1 • Ücretsiz</Badge>
-                ) : (
+                {isFreeLesson && (
+                  <Badge variant="emerald">Ücretsiz Ders</Badge>
+                )}
+                {!isFreeLesson && !isPro && (
                   <Badge variant="amber">PRO Ders</Badge>
                 )}
               </div>
@@ -91,11 +92,11 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           <CardProLockOverlay cardNumber={card.number} onOpenPaywall={onOpenPaywall} />
         ) : (
           <div>
-            <h4 className="text-xs font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1 mb-2">
+            <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1 mb-2">
               <Compass className="w-3.5 h-3.5 text-purple-400" />
               {t('daily.guidanceTitle')}
             </h4>
-            <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3 rounded-2xl border border-purple-500/30 shadow-inner">
+            <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 shadow-inner">
               {t(`cards.${card.id}.guidance`, card.guidance)}
             </p>
           </div>
