@@ -1,9 +1,11 @@
 class SoundService {
   private audioCtx: AudioContext | null = null
+  private masterGain: GainNode | null = null
   private ambientInterval: any = null
   private activeTrackId: string | null = null
   private isUnlocked = false
   private silentAudioElem: HTMLAudioElement | null = null
+  private activeNodes: Array<{ osc: OscillatorNode; gain: GainNode }> = []
 
   // 0.1 sec silent WAV data URI to force iOS Hardware Audio Session active (Bypasses iOS Silent Switch Mute)
   private SILENT_AUDIO_URI =
@@ -44,7 +46,11 @@ class SoundService {
         const buffer = ctx.createBuffer(1, 1, 22050)
         const source = ctx.createBufferSource()
         source.buffer = buffer
-        source.connect(ctx.destination)
+        if (this.masterGain) {
+          source.connect(this.masterGain)
+        } else {
+          source.connect(ctx.destination)
+        }
         source.start(0)
       }
       this.isUnlocked = true
@@ -59,6 +65,9 @@ class SoundService {
       const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext
       if (AudioCtxClass) {
         this.audioCtx = new AudioCtxClass()
+        this.masterGain = this.audioCtx.createGain()
+        this.masterGain.gain.setValueAtTime(1.0, this.audioCtx.currentTime)
+        this.masterGain.connect(this.audioCtx.destination)
       }
     }
     if (this.audioCtx && this.audioCtx.state === 'suspended') {
@@ -71,7 +80,7 @@ class SoundService {
     try {
       this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
-      if (!ctx) return
+      if (!ctx || !this.masterGain) return
 
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
@@ -84,7 +93,7 @@ class SoundService {
       gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(this.masterGain)
 
       osc.start()
       osc.stop(ctx.currentTime + 0.12)
@@ -97,7 +106,7 @@ class SoundService {
     try {
       this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
-      if (!ctx) return
+      if (!ctx || !this.masterGain) return
 
       const freqs = [528, 660, 792, 1056]
       freqs.forEach((freq, idx) => {
@@ -111,7 +120,7 @@ class SoundService {
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.6)
 
         osc.connect(gain)
-        gain.connect(ctx.destination)
+        gain.connect(this.masterGain!)
 
         osc.start(ctx.currentTime + idx * 0.08)
         osc.stop(ctx.currentTime + idx * 0.08 + 0.6)
@@ -125,7 +134,7 @@ class SoundService {
     try {
       this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
-      if (!ctx) return
+      if (!ctx || !this.masterGain) return
 
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
@@ -137,7 +146,7 @@ class SoundService {
       gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(this.masterGain)
 
       osc.start()
       osc.stop(ctx.currentTime + 0.05)
@@ -154,7 +163,7 @@ class SoundService {
     try {
       this.unlockAudioOnUserInteraction()
       const ctx = this.getAudioContext()
-      if (!ctx) return
+      if (!ctx || !this.masterGain) return
 
       const now = ctx.currentTime
 
@@ -177,16 +186,26 @@ class SoundService {
       gain2.gain.exponentialRampToValueAtTime(0.001, now + 3.2)
 
       osc1.connect(gain1)
-      gain1.connect(ctx.destination)
+      gain1.connect(this.masterGain)
 
       osc2.connect(gain2)
-      gain2.connect(ctx.destination)
+      gain2.connect(this.masterGain)
 
       osc1.start(now)
       osc2.start(now)
 
       osc1.stop(now + 3.2)
       osc2.stop(now + 3.2)
+
+      // Track active nodes for instant emergency stop
+      this.activeNodes.push({ osc: osc1, gain: gain1 }, { osc: osc2, gain: gain2 })
+
+      // Clean up reference after sound stops
+      setTimeout(() => {
+        this.activeNodes = this.activeNodes.filter(
+          (node) => node.osc !== osc1 && node.osc !== osc2
+        )
+      }, 3300)
     } catch (e) {
       console.warn('[SoundService] Bell strike error:', e)
     }
@@ -195,6 +214,15 @@ class SoundService {
   public startAmbientLoop(trackId: string, baseFreq: number): void {
     this.unlockAudioOnUserInteraction()
     this.stopAmbientLoop()
+
+    const ctx = this.getAudioContext()
+    if (this.masterGain && ctx) {
+      try {
+        this.masterGain.gain.cancelScheduledValues(ctx.currentTime)
+        this.masterGain.gain.setValueAtTime(1.0, ctx.currentTime)
+      } catch (e) {}
+    }
+
     this.activeTrackId = trackId
 
     // Play first relaxing chime immediately
@@ -207,10 +235,39 @@ class SoundService {
   }
 
   public stopAmbientLoop(): void {
+    // 1. Clear interval
     if (this.ambientInterval) {
       clearInterval(this.ambientInterval)
       this.ambientInterval = null
     }
+
+    // 2. Instantly mute master gain
+    if (this.masterGain && this.audioCtx) {
+      try {
+        this.masterGain.gain.cancelScheduledValues(this.audioCtx.currentTime)
+        this.masterGain.gain.setValueAtTime(0, this.audioCtx.currentTime)
+      } catch (e) {}
+    }
+
+    // 3. Stop & disconnect all playing oscillator nodes
+    this.activeNodes.forEach(({ osc, gain }) => {
+      try {
+        gain.gain.cancelScheduledValues(0)
+        gain.gain.setValueAtTime(0, 0)
+        osc.stop(0)
+        osc.disconnect()
+      } catch (e) {}
+    })
+    this.activeNodes = []
+
+    // 4. Pause silent audio
+    if (this.silentAudioElem) {
+      try {
+        this.silentAudioElem.pause()
+        this.silentAudioElem.currentTime = 0
+      } catch (e) {}
+    }
+
     this.activeTrackId = null
   }
 
