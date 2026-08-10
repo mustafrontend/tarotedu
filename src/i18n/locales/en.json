@@ -505,5 +505,33 @@
     "resultTitle": "✨ Mystic Dream & Archetype Analysis",
     "errorMsg": "Please describe your dream and draw a guiding card.",
     "newAnalysisBtn": "New Dream Analysis"
+  },
+  "player": {
+    "title": "Mystic Ambient Sound Player",
+    "subtitle": "Enhance your tarot session with sacred Solfeggio frequencies",
+    "solfeggio": "528Hz Transformation Frequency",
+    "solfeggioDesc": "Miracles, mental clarity & DNA alignment",
+    "cosmic": "Cosmic Resonance & Love Chime",
+    "cosmicDesc": "Deep bonds, love & relationship harmony",
+    "bell": "Tibetan Sacred Bell",
+    "bellDesc": "Universal sacred geometry tuning",
+    "rain": "Mystic Rain & Intuition",
+    "rainDesc": "Mental detox & intuitive awakening",
+    "omChant": "Sacred Om Frequency",
+    "omChantDesc": "Root chakra balancing & planetary harmony",
+    "crownChakra": "Crown Chakra & Divine Light",
+    "crownChakraDesc": "Unity consciousness & higher self connection",
+    "thirdEye": "Third Eye Intuition Frequency",
+    "thirdEyeDesc": "Clairvoyance & perceiving the unseen",
+    "deltaDeep": "Deep Healing & Relaxation",
+    "deltaDeepDesc": "Pain relief & cellular rejuvenation",
+    "forestShaman": "Shamanic Nature Wind",
+    "forestShamanDesc": "Aura repair & energy field shield",
+    "heartHealing": "Heart Chakra Cleansing",
+    "heartHealingDesc": "Releasing past emotional blockages",
+    "solfeggioBadge": "528Hz Solfeggio",
+    "homeDesc": "Elevate your meditation with ambient Solfeggio tones.",
+    "freeBadge": "FREE",
+    "loopActive": "Continuous Loop Active"
   }
 }
