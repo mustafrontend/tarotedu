@@ -11,6 +11,8 @@ interface DailyJournalSectionProps {
   onSave: () => void
 }
 
+import { useTarotStore } from '../../../store/tarotStore'
+
 export const DailyJournalSection: React.FC<DailyJournalSectionProps> = ({
   journalNote,
   onJournalNoteChange,
@@ -18,10 +20,14 @@ export const DailyJournalSection: React.FC<DailyJournalSectionProps> = ({
   onSave,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   return (
     <CardBase hoverEffect={false} className="space-y-3 p-5">
-      <h4 className="text-xs font-bold text-purple-200 uppercase tracking-wider">
+      <h4 className={`text-xs font-bold uppercase tracking-wider ${
+        isDark ? 'text-purple-200/80' : 'text-slate-600'
+      }`}>
         {t('daily.journalTitle')}
       </h4>
       <textarea
@@ -29,7 +35,11 @@ export const DailyJournalSection: React.FC<DailyJournalSectionProps> = ({
         onChange={(e) => onJournalNoteChange(e.target.value)}
         placeholder={t('daily.journalPlaceholder')}
         rows={3}
-        className="w-full p-3 rounded-2xl bg-slate-950/60 border border-purple-500/30 text-xs text-white placeholder-slate-400 font-medium focus:outline-none focus:border-purple-500/80 shadow-inner"
+        className={`w-full p-3 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
+          isDark
+            ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-500/80'
+            : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
+        }`}
       />
       <div className="flex justify-between items-center pt-2">
         <Button variant="outline" size="sm" onClick={onRedraw}>

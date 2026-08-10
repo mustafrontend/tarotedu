@@ -5,8 +5,12 @@ import { DailyCardResult } from './components/DailyCardResult'
 import { DailyIntentionForm } from './components/DailyIntentionForm'
 import { useDailyDraw } from './hooks/useDailyDraw'
 
+import { useTarotStore } from '../../store/tarotStore'
+
 export const DailyView: React.FC = () => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
   const {
     intention,
     setIntention,
@@ -25,11 +29,15 @@ export const DailyView: React.FC = () => {
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
           <Sun className="w-6 h-6 text-amber-500" />
           {t('daily.title')}
         </h2>
-        <p className="text-xs text-purple-200/80 font-medium">{t('daily.subtitle')}</p>
+        <p className={`text-xs font-medium ${
+          isDark ? 'text-purple-200/80' : 'text-slate-600'
+        }`}>{t('daily.subtitle')}</p>
       </div>
 
       {!isFlipped ? (

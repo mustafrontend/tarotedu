@@ -13,6 +13,8 @@ interface DailyCardResultProps {
   onRedraw: () => void
 }
 
+import { useTarotStore } from '../../../store/tarotStore'
+
 export const DailyCardResult: React.FC<DailyCardResultProps> = ({
   drawnCard,
   position,
@@ -21,6 +23,8 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
   onRedraw,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const handleSave = () => {
     alert(t('daily.journalSaved'))
@@ -35,7 +39,11 @@ export const DailyCardResult: React.FC<DailyCardResultProps> = ({
 
   return (
     <div className="space-y-6 font-sans">
-      <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-slate-900/90 p-6 rounded-3xl border border-purple-500/30 text-white shadow-xl backdrop-blur-xl">
+      <div className={`flex flex-col sm:flex-row gap-6 items-center sm:items-start p-6 rounded-3xl border shadow-xl backdrop-blur-xl transition-colors ${
+        isDark
+          ? 'bg-slate-900/90 border-purple-500/30 text-white'
+          : 'bg-white border-slate-200 text-slate-900 shadow-xl'
+      }`}>
         <DailyCardVisual
           drawnCard={drawnCard}
           position={position}

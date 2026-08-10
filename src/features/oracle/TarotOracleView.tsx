@@ -16,6 +16,8 @@ interface TarotOracleViewProps {
 export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall }) => {
   const { t } = useTranslation()
   const isPro = useTarotStore((state) => state.isPro)
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const [prompt, setPrompt] = useState('')
   const [validationError, setValidationError] = useState<string | null>(null)
@@ -66,11 +68,13 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
-          <Wand2 className="w-6 h-6 text-purple-400" />
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
+          <Wand2 className={`w-6 h-6 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           {t('oracle.title')}
         </h2>
-        <p className="text-xs text-purple-200/80">{t('oracle.subtitle')}</p>
+        <p className={`text-xs font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>{t('oracle.subtitle')}</p>
       </div>
 
       <CardBase hoverEffect={false} className="space-y-4 p-6">
@@ -82,10 +86,14 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
           }}
           placeholder={t('oracle.promptPlaceholder')}
           rows={3}
-          className={`w-full p-3 rounded-2xl bg-slate-900/90 border text-xs text-white placeholder-slate-400 font-medium focus:outline-none shadow-inner transition-colors ${
+          className={`w-full p-3 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
             validationError
-              ? 'border-rose-500/80 bg-rose-950/20 focus:border-rose-400'
-              : 'border-purple-500/30 focus:border-purple-400'
+              ? isDark
+                ? 'border-rose-500/80 bg-rose-950/20 focus:border-rose-400 text-white'
+                : 'border-rose-500 bg-rose-50 focus:border-rose-600 text-slate-900'
+              : isDark
+              ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
+              : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
           }`}
         />
 
@@ -93,7 +101,11 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
           <motion.div
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-1.5 text-xs text-rose-300 font-bold bg-rose-950/60 p-2.5 rounded-xl border border-rose-500/40"
+            className={`flex items-center gap-1.5 text-xs font-bold p-2.5 rounded-xl border ${
+              isDark
+                ? 'bg-rose-950/60 border-rose-500/40 text-rose-300'
+                : 'bg-rose-50 border-rose-300 text-rose-700'
+            }`}
           >
             <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
             <span>{validationError}</span>
@@ -101,7 +113,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
         )}
 
         <div className="flex justify-between items-center">
-          <span className="text-[11px] text-purple-200/70 font-medium">
+          <span className={`text-[11px] font-medium ${isDark ? 'text-purple-200/70' : 'text-slate-500'}`}>
             {t('oracle.helperHint')}
           </span>
           <Button
@@ -118,21 +130,27 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
       </CardBase>
 
       {isAnalyzing && (
-        <CardBase hoverEffect={false} className="p-6 text-center space-y-2 bg-purple-950/60 border border-purple-500/30">
+        <CardBase hoverEffect={false} className={`p-6 text-center space-y-2 border ${
+          isDark ? 'bg-purple-950/60 border-purple-500/30' : 'bg-purple-50 border-purple-200'
+        }`}>
           <Sparkles className="w-6 h-6 text-purple-400 animate-spin mx-auto" />
-          <p className="text-xs font-bold text-purple-200">{t('oracle.analyzing')}</p>
+          <p className={`text-xs font-bold ${isDark ? 'text-purple-200' : 'text-purple-900'}`}>{t('oracle.analyzing')}</p>
         </CardBase>
       )}
 
       {oracleAnswer && (
-        <CardBase hoverEffect={false} className="p-6 space-y-3 bg-gradient-to-br from-purple-950 to-indigo-950 text-white border border-purple-500/30 shadow-xl shadow-purple-950/50">
+        <CardBase hoverEffect={false} className={`p-6 space-y-3 border shadow-xl ${
+          isDark
+            ? 'bg-gradient-to-br from-purple-950 to-indigo-950 text-white border-purple-500/30 shadow-purple-950/50'
+            : 'bg-gradient-to-br from-purple-50 to-indigo-50 text-slate-900 border-purple-200'
+        }`}>
           <div className="flex items-center gap-2">
             <span className="text-2xl">{oracleAnswer.cardEmoji}</span>
-            <h3 className="text-base font-black text-amber-300">
+            <h3 className={`text-base font-black ${isDark ? 'text-amber-300' : 'text-purple-900'}`}>
               {oracleAnswer.cardName}
             </h3>
           </div>
-          <p className="text-xs text-purple-100 leading-relaxed font-medium">
+          <p className={`text-xs leading-relaxed font-medium ${isDark ? 'text-purple-100' : 'text-slate-700'}`}>
             {oracleAnswer.response}
           </p>
         </CardBase>

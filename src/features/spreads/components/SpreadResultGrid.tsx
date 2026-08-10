@@ -10,16 +10,22 @@ interface SpreadResultGridProps {
   onReset: () => void
 }
 
+import { useTarotStore } from '../../../store/tarotStore'
+
 export const SpreadResultGrid: React.FC<SpreadResultGridProps> = ({
   drawnCards,
   onReset,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   return (
     <div className="space-y-6 font-sans">
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wider">
+        <h3 className={`text-sm font-bold uppercase tracking-wider ${
+          isDark ? 'text-amber-300' : 'text-purple-900'
+        }`}>
           {t('spreads.readingLayout', { count: drawnCards.length })}
         </h3>
         <Button variant="outline" size="sm" onClick={onReset}>

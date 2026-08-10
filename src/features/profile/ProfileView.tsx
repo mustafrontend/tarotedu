@@ -15,6 +15,8 @@ interface ProfileViewProps {
 export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
   const { t } = useTranslation()
   const isPro = useTarotStore((state) => state.isPro)
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const [birthDate, setBirthDate] = useState('')
   const [lifePathResult, setLifePathResult] = useState<number | null>(null)
@@ -36,11 +38,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
-          <User className="w-6 h-6 text-purple-400" />
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
+          <User className={`w-6 h-6 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           {t('profile.title')}
         </h2>
-        <p className="text-xs text-purple-200/80 font-medium">{t('profile.subtitle')}</p>
+        <p className={`text-xs font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>{t('profile.subtitle')}</p>
       </div>
 
       {/* PRO Membership Banner */}
@@ -49,7 +53,9 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
         className={`p-5 flex items-center justify-between border ${
           isPro
             ? 'bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white border-purple-500/40 shadow-xl shadow-purple-950/50'
-            : 'bg-slate-900/90 border-purple-500/30 text-white'
+            : isDark
+            ? 'bg-slate-900 border-purple-500/30 text-white'
+            : 'bg-white border-slate-200 text-slate-900 shadow-md'
         }`}
       >
         <div className="flex items-center gap-3">
@@ -57,10 +63,10 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
             <Crown className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="text-sm font-black text-white">
+            <h4 className={`text-sm font-black ${isPro || isDark ? 'text-white' : 'text-slate-900'}`}>
               {isPro ? t('profile.unlimited') : t('profile.proStatus')}
             </h4>
-            <p className="text-xs text-purple-200/80 font-medium">
+            <p className={`text-xs font-medium ${isPro || isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
               {isPro ? t('profile.proActiveDesc') : t('profile.proUnlockDesc')}
             </p>
           </div>
@@ -75,8 +81,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
 
       {/* Numerology Calculator */}
       <CardBase hoverEffect={false} className="space-y-4 p-5">
-        <div className="flex items-center gap-2 text-white font-black text-sm">
-          <Calculator className="w-4 h-4 text-purple-400" />
+        <div className={`flex items-center gap-2 font-black text-sm ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          <Calculator className={`w-4 h-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           <span>{t('profile.lifePath')}</span>
         </div>
 
@@ -85,7 +91,11 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
             type="date"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
-            className="flex-1 p-2.5 rounded-2xl bg-slate-900/90 border border-purple-500/30 text-xs font-medium text-white placeholder-slate-400 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/50 shadow-inner [color-scheme:dark]"
+            className={`flex-1 p-2.5 rounded-2xl border text-xs font-medium transition-colors ${
+              isDark
+                ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:outline-none focus:border-purple-400 [color-scheme:dark]'
+                : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 shadow-sm [color-scheme:light]'
+            }`}
           />
           <Button variant="primary" size="sm" onClick={calculateLifePath}>
             {t('profile.calculate')}
@@ -93,25 +103,33 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
         </div>
 
         {lifePathResult !== null && (
-          <div className="bg-purple-950/60 p-4 rounded-2xl border border-purple-500/30 flex items-center justify-between shadow-inner">
+          <div className={`p-4 rounded-2xl border flex items-center justify-between shadow-inner ${
+            isDark
+              ? 'bg-purple-950/60 border-purple-500/30'
+              : 'bg-purple-50 border-purple-200'
+          }`}>
             <div>
-              <p className="text-xs font-bold text-purple-200">{t('profile.yourLifePath')}</p>
-              <p className="text-2xl font-black text-amber-300">#{lifePathResult}</p>
+              <p className={`text-xs font-bold ${isDark ? 'text-purple-200' : 'text-purple-900'}`}>{t('profile.yourLifePath')}</p>
+              <p className={`text-2xl font-black ${isDark ? 'text-amber-300' : 'text-purple-700'}`}>#{lifePathResult}</p>
             </div>
-            <Sparkles className="w-6 h-6 text-amber-300" />
+            <Sparkles className="w-6 h-6 text-amber-400" />
           </div>
         )}
       </CardBase>
 
       {/* Language Picker Option */}
       <CardBase hoverEffect={false} className="space-y-3 p-5">
-        <h4 className="text-xs font-bold text-purple-300 uppercase tracking-wider">
+        <h4 className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-purple-300' : 'text-purple-900'}`}>
           {t('profile.settings')}
         </h4>
 
         <button
           onClick={() => setIsLangOpen(true)}
-          className="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-900/80 border border-purple-500/30 hover:bg-purple-900/40 transition-colors text-xs font-semibold text-white"
+          className={`w-full flex items-center justify-between p-3 rounded-2xl border transition-colors text-xs font-semibold ${
+            isDark
+              ? 'bg-slate-900/80 border-purple-500/30 hover:bg-purple-900/40 text-white'
+              : 'bg-white border-slate-300 hover:bg-slate-100 text-slate-800 shadow-sm'
+          }`}
         >
           <div className="flex items-center gap-2">
             <Globe className="w-4 h-4 text-purple-400" />

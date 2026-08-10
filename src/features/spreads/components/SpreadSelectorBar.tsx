@@ -25,6 +25,8 @@ export const SpreadSelectorBar: React.FC<SpreadSelectorBarProps> = ({
 }) => {
   const { t } = useTranslation()
   const isPro = useTarotStore((state) => state.isPro)
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const proLockedSpreads: SpreadType[] = ['celtic-cross', 'horseshoe', 'career']
 
@@ -51,7 +53,9 @@ export const SpreadSelectorBar: React.FC<SpreadSelectorBarProps> = ({
               className={`px-3 py-2 rounded-2xl border text-xs font-bold transition-all flex items-center gap-1.5 ${
                 isSelected
                   ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.4)]'
-                  : 'bg-slate-900/80 text-slate-300 border-purple-500/30 hover:bg-slate-800/90 hover:text-white'
+                  : isDark
+                  ? 'bg-slate-900/80 text-slate-300 border-purple-500/30 hover:bg-slate-800/90 hover:text-white'
+                  : 'bg-slate-200/80 text-slate-700 border-slate-300 hover:bg-slate-300 hover:text-slate-900'
               }`}
             >
               <span>{t(spreadsConfig[spreadKey].nameKey)}</span>

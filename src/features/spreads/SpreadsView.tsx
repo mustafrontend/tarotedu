@@ -73,14 +73,21 @@ export const SpreadsView: React.FC<SpreadsViewProps> = ({ onOpenPaywall }) => {
     setIsReadingComplete(false)
   }
 
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
+
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-purple-400" />
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
+          <Sparkles className={`w-6 h-6 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           {t('spreads.title')}
         </h2>
-        <p className="text-xs text-slate-300">{t('spreads.subtitle')}</p>
+        <p className={`text-xs font-medium ${
+          isDark ? 'text-purple-200/80' : 'text-slate-600'
+        }`}>{t('spreads.subtitle')}</p>
       </div>
 
       <SpreadSelectorBar

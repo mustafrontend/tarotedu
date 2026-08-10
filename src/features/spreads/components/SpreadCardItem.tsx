@@ -9,11 +9,16 @@ interface SpreadCardItemProps {
   index: number
 }
 
+import { useTarotStore } from '../../../store/tarotStore'
+
 export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
   readingCard,
   index,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
+
   const localizedName = t(`cards.${readingCard.card.id}.name`, readingCard.card.name)
   const localizedMeaning =
     readingCard.position === 'upright'
@@ -33,7 +38,7 @@ export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
               defaultValue: readingCard.positionName,
             })}
           </span>
-          <span className="text-[10px] font-semibold text-purple-200">
+          <span className={`text-[10px] font-semibold ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
             {readingCard.position === 'upright' ? t('daily.upright') : t('daily.reversed')}
           </span>
         </div>
@@ -57,8 +62,8 @@ export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
             )}
           </div>
           <div>
-            <h4 className="text-sm font-black text-white">{localizedName}</h4>
-            <p className="text-xs text-purple-100 font-medium line-clamp-2 mt-0.5">
+            <h4 className={`text-sm font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>{localizedName}</h4>
+            <p className={`text-xs font-medium line-clamp-2 mt-0.5 ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
               {localizedMeaning}
             </p>
           </div>
