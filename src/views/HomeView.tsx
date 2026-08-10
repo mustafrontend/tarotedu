@@ -56,7 +56,9 @@ export const HomeView = () => {
           </div>
         </div>
 
-        <p className='text-gray-700 leading-relaxed'>{todayCard.meaning.upright}</p>
+        <p className='text-gray-700 leading-relaxed whitespace-pre-line'>
+          {t(`cards.${todayCard.id}.upright`, todayCard.meaning.upright)}
+        </p>
         <Button variant='secondary' size='lg' className='w-full justify-center'>
           {t('daily.draw')}
         </Button>

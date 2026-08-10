@@ -96,7 +96,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
               <Compass className="w-3.5 h-3.5 text-purple-400" />
               {t('daily.guidanceTitle')}
             </h4>
-            <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 shadow-inner">
+            <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 shadow-inner whitespace-pre-line">
               {t(`cards.${card.id}.guidance`, card.guidance)}
             </p>
           </div>

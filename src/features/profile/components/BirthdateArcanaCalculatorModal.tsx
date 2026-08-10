@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Sparkles } from 'lucide-react'
 import { ModalBase } from '../../../components/atoms/ModalBase'
 import { Button } from '../../../components/atoms/Button'
@@ -13,6 +14,7 @@ export const BirthdateArcanaCalculatorModal: React.FC<BirthdateArcanaCalculatorM
   isOpen,
   onClose,
 }) => {
+  const { t } = useTranslation()
   const [birthdate, setBirthdate] = useState('')
   const [resultCard, setResultCard] = useState<typeof majorArcana[0] | null>(null)
 
@@ -29,6 +31,10 @@ export const BirthdateArcanaCalculatorModal: React.FC<BirthdateArcanaCalculatorM
     const card = majorArcana.find((c) => c.number === sum) || majorArcana[0]
     setResultCard(card)
   }
+
+  const localizedName = resultCard ? t(`cards.${resultCard.id}.name`, resultCard.name) : ''
+  const localizedKw = resultCard ? t(`cards.${resultCard.id}.kw`, resultCard.keywords.upright.join(' • ')) : ''
+  const localizedUpright = resultCard ? t(`cards.${resultCard.id}.upright`, resultCard.meaning.upright) : ''
 
   return (
     <ModalBase isOpen={isOpen} onClose={onClose} title="🔮 Kişisel Kader & Ruh Kartı Analizi">
@@ -79,16 +85,16 @@ export const BirthdateArcanaCalculatorModal: React.FC<BirthdateArcanaCalculatorM
                   Senin Kader Arkana Kartın
                 </span>
                 <h3 className="text-lg font-black text-white">
-                  #{resultCard.number} {resultCard.name}
+                  #{resultCard.number} {localizedName}
                 </h3>
                 <p className="text-xs text-purple-200/90 font-medium">
-                  {resultCard.keywords.upright.join(' • ')}
+                  {localizedKw}
                 </p>
               </div>
             </div>
 
-            <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/30 text-xs text-purple-100 font-medium leading-relaxed">
-              {resultCard.meaning.upright}
+            <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/30 text-xs text-purple-100 font-medium leading-relaxed whitespace-pre-line">
+              {localizedUpright}
             </div>
           </div>
         )}

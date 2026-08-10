@@ -24,7 +24,7 @@ export const CardDetailTabsContent: React.FC<CardDetailTabsContentProps> = ({ ca
               <Sun className="w-3.5 h-3.5 text-amber-400" />
               {t('academy.uprightMeaning')}
             </h4>
-            <p className="text-xs text-purple-100 font-medium leading-relaxed bg-slate-900/90 p-3 rounded-xl border border-purple-500/30 shadow-inner">
+            <p className="text-xs text-purple-100 font-medium leading-relaxed bg-slate-900/90 p-3 rounded-xl border border-purple-500/30 shadow-inner whitespace-pre-line">
               {t(`cards.${card.id}.upright`, card.meaning.upright)}
             </p>
           </div>
@@ -33,7 +33,7 @@ export const CardDetailTabsContent: React.FC<CardDetailTabsContentProps> = ({ ca
               <Moon className="w-3.5 h-3.5 text-indigo-400" />
               {t('academy.reversedMeaning')}
             </h4>
-            <p className="text-xs text-purple-100 font-medium leading-relaxed bg-slate-900/90 p-3 rounded-xl border border-purple-500/30 shadow-inner">
+            <p className="text-xs text-purple-100 font-medium leading-relaxed bg-slate-900/90 p-3 rounded-xl border border-purple-500/30 shadow-inner whitespace-pre-line">
               {t(`cards.${card.id}.reversed`, card.meaning.reversed)}
             </p>
           </div>
@@ -45,7 +45,7 @@ export const CardDetailTabsContent: React.FC<CardDetailTabsContentProps> = ({ ca
           <span className="font-bold text-amber-300 flex items-center gap-1 mb-1 text-xs">
             <Eye className="w-4 h-4 text-amber-400" /> Kadim Sembolizm & Arketip Analizi
           </span>
-          <p className="text-xs leading-relaxed">
+          <p className="text-xs leading-relaxed whitespace-pre-line">
             {t(`cards.${card.id}.symbolism`, defaultSymbolism)}
           </p>
         </div>
@@ -57,7 +57,7 @@ export const CardDetailTabsContent: React.FC<CardDetailTabsContentProps> = ({ ca
             <span className="font-bold text-pink-300 flex items-center gap-1 text-xs">
               <Heart className="w-4 h-4 text-pink-400" /> Aşk & İlişki Yorumu:
             </span>
-            <p className="text-xs text-purple-100 font-medium leading-relaxed">
+            <p className="text-xs text-purple-100 font-medium leading-relaxed whitespace-pre-line">
               {t(`cards.${card.id}.love`, defaultLove)}
             </p>
           </div>
@@ -66,7 +66,7 @@ export const CardDetailTabsContent: React.FC<CardDetailTabsContentProps> = ({ ca
             <span className="font-bold text-teal-300 flex items-center gap-1 text-xs">
               <Briefcase className="w-4 h-4 text-teal-400" /> Kariyer & Finans Yorumu:
             </span>
-            <p className="text-xs text-purple-100 font-medium leading-relaxed">
+            <p className="text-xs text-purple-100 font-medium leading-relaxed whitespace-pre-line">
               {t(`cards.${card.id}.career`, defaultCareer)}
             </p>
           </div>

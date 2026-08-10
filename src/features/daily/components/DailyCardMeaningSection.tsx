@@ -32,7 +32,7 @@ export const DailyCardMeaningSection: React.FC<DailyCardMeaningSectionProps> = (
         <h4 className="text-xs font-bold text-purple-200 uppercase tracking-wider mb-1">
           {t('daily.cardMeaning')}
         </h4>
-        <p className="text-xs text-purple-100 leading-relaxed bg-slate-950/60 p-3.5 rounded-2xl border border-purple-500/20 font-medium">
+        <p className="text-xs text-purple-100 leading-relaxed bg-slate-950/60 p-3.5 rounded-2xl border border-purple-500/20 font-medium whitespace-pre-line">
           {localizedMeaning}
         </p>
       </div>
@@ -42,7 +42,7 @@ export const DailyCardMeaningSection: React.FC<DailyCardMeaningSectionProps> = (
           <Compass className="w-3.5 h-3.5 text-purple-400" />
           {t('daily.guidanceTitle')}
         </h4>
-        <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 font-medium">
+        <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 font-medium whitespace-pre-line">
           {localizedGuidance}
         </p>
       </div>

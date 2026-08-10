@@ -80,17 +80,21 @@ export const DailyView = () => {
             </div>
 
             <div>
-              <h4 className='font-serif text-xl font-bold text-tarot-800 mb-4'>{dailyDrawing.card.name}</h4>
-              <p className='text-gray-700 leading-relaxed'>
+              <h4 className='font-serif text-xl font-bold text-tarot-800 mb-4'>
+                {t(`cards.${dailyDrawing.card.id}.name`, dailyDrawing.card.name)}
+              </h4>
+              <p className='text-gray-700 leading-relaxed whitespace-pre-line'>
                 {dailyDrawing.position === 'upright'
-                  ? dailyDrawing.card.meaning.upright
-                  : dailyDrawing.card.meaning.reversed}
+                  ? t(`cards.${dailyDrawing.card.id}.upright`, dailyDrawing.card.meaning.upright)
+                  : t(`cards.${dailyDrawing.card.id}.reversed`, dailyDrawing.card.meaning.reversed)}
               </p>
             </div>
 
             <div className='bg-white/50 p-4 rounded-lg'>
               <p className='text-sm text-gray-600 font-medium'>Guidance for Today</p>
-              <p className='text-gray-800 mt-2'>{dailyDrawing.card.guidance}</p>
+              <p className='text-gray-800 mt-2 whitespace-pre-line'>
+                {t(`cards.${dailyDrawing.card.id}.guidance`, dailyDrawing.card.guidance)}
+              </p>
             </div>
 
             {intention && (
