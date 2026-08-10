@@ -48,22 +48,13 @@ export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="w-12 h-20 rounded-xl bg-slate-950 border border-purple-400/40 text-amber-300 overflow-hidden shrink-0 shadow-md relative">
-            {readingCard.card.videoUrl ? (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-                src={readingCard.card.videoUrl}
-              />
-            ) : (
-              <div className="w-full h-full p-1 text-center flex flex-col justify-between">
-                <span className="text-[9px] font-mono font-bold">#{readingCard.card.number}</span>
-                <span className="text-sm">🔮</span>
-              </div>
-            )}
+          <div className="w-12 h-20 rounded-xl bg-slate-950 border border-purple-400/40 text-amber-300 overflow-hidden shrink-0 relative shadow-md">
+            <img
+              src={readingCard.card.image}
+              alt={localizedName}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h4 className={`text-sm font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>{localizedName}</h4>

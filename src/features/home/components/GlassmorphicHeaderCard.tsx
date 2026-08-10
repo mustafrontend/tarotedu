@@ -28,7 +28,7 @@ export const GlassmorphicHeaderCard: React.FC<GlassmorphicHeaderCardProps> = ({
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none scale-105"
+        className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none scale-105"
         src="/videos/A_D_cinematic_seamless_loop_o.mp4"
       />
 

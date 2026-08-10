@@ -30,7 +30,7 @@ export const HeroKineticSection: React.FC<HeroKineticSectionProps> = ({
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none scale-105"
+        className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none scale-105"
         src="/videos/A_D_cinematic_seamless_loop_o.mp4"
       />
 

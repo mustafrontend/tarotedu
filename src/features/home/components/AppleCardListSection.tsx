@@ -55,20 +55,12 @@ export const AppleCardListSection: React.FC<AppleCardListSectionProps> = ({
               <div className="flex items-center gap-3.5 min-w-0">
                 {/* Square Media Thumbnail */}
                 <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-purple-400/40 overflow-hidden shrink-0 relative shadow-md">
-                  {card.videoUrl ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform"
-                      src={card.videoUrl}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-amber-300">
-                      <Sparkles className="w-5 h-5" />
-                    </div>
-                  )}
+                  <img
+                    src={card.image}
+                    alt={localizedName}
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform"
+                  />
                   <div className="absolute inset-0 bg-slate-950/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <Play className="w-4 h-4 text-white fill-current" />
                   </div>

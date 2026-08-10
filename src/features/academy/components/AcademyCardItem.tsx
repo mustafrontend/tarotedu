@@ -37,16 +37,12 @@ export const AcademyCardItem: React.FC<AcademyCardItemProps> = ({
           : 'bg-slate-900 border-purple-400/40 hover:border-purple-600'
       }`}
     >
-      {card.videoUrl ? (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-          src={card.videoUrl}
-        />
-      ) : null}
+      <img
+        src={card.image}
+        alt={card.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+      />
 
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-purple-950/50 p-3 flex flex-col justify-between z-10">
         <div className="flex items-center justify-between text-[11px] font-mono font-bold text-amber-300">

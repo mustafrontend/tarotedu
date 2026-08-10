@@ -44,19 +44,13 @@ export const MysticFloatingCardGrid: React.FC<MysticFloatingCardGridProps> = ({
             onClick={() => onNavigate('learn')}
             className="relative h-60 rounded-[2rem] overflow-hidden shadow-lg border-[0.5px] border-purple-500/30 group cursor-pointer active:scale-95 transition-all duration-200 flex flex-col justify-between p-3.5"
           >
-            {/* Background Video */}
-            {card.videoUrl ? (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-                src={card.videoUrl}
-              />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-950 to-indigo-900" />
-            )}
+            {/* Background Card Image with Gradient */}
+            <img
+              src={card.image}
+              alt={card.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+            />
 
             {/* Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/40 pointer-events-none" />
