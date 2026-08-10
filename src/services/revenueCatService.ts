@@ -2,7 +2,7 @@ import { Capacitor } from '@capacitor/core'
 import { Purchases, LOG_LEVEL, PurchasesPackage } from '@revenuecat/purchases-capacitor'
 import { tarotApiService } from './tarotApiService'
 
-export const REVENUECAT_API_KEY = 'appl_JYVlJKQALPEgHINrBpUgYismGUU'
+export const REVENUECAT_API_KEY = 'appl_KYCMWKtHLpIvVfRoVOlwEOgfuRZ'
 export const REVENUECAT_ENTITLEMENT_ID = 'pro_access'
 
 export const initializeRevenueCat = async (): Promise<boolean> => {

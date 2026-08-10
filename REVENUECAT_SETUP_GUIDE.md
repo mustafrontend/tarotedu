@@ -11,7 +11,7 @@ Uygulamanızdaki sabit kod değerleri aşağıda tanımlanmıştır:
 | Parametre | Değer / ID | Açıklama |
 | :--- | :--- | :--- |
 | **App Bundle ID** | `com.tarotedu.pro.app` | iOS Uygulama Paketi Kimliği |
-| **RevenueCat Public API Key** | `appl_JYVlJKQALPEgHINrBpUgYismGUU` | `revenueCatService.ts` içindeki API anahtarı |
+| **RevenueCat Public API Key** | `appl_KYCMWKtHLpIvVfRoVOlwEOgfuRZ` | `revenueCatService.ts` içindeki API anahtarı |
 | **Entitlement ID** | `pro_access` | PRO özelliklerin kilidini açan yetki kimliği |
 
 ---
