@@ -24,6 +24,8 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
   onOpenPaywall,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
   const isPro = useTarotStore((state) => state.isPro)
   const learnedCards = useTarotStore((state) => state.learnedCards)
   const toggleLearned = useTarotStore((state) => state.toggleLearnedCard)
@@ -45,23 +47,19 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           <div className="space-y-3 flex-1 w-full">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Badge variant="purple">
-                  {t('academy.majorArcana')} #{card.number}
-                </Badge>
-                {isFreeLesson && (
-                  <Badge variant="emerald">Ücretsiz Ders</Badge>
-                )}
-                {!isFreeLesson && !isPro && (
-                  <Badge variant="amber">PRO Ders</Badge>
-                )}
+                <Badge variant="purple">{t('academy.majorArcana')} #{card.number}</Badge>
+                {isFreeLesson && <Badge variant="emerald">Ücretsiz Ders</Badge>}
+                {!isFreeLesson && !isPro && <Badge variant="amber">PRO Ders</Badge>}
               </div>
             </div>
 
-            <div className="flex bg-slate-900 p-1 rounded-xl border border-purple-500/30 text-xs font-bold">
+            <div className={`flex p-1 rounded-xl border text-xs font-bold transition-colors ${
+              isDark ? 'bg-slate-900/90 border-purple-500/30' : 'bg-slate-200/80 border-slate-300'
+            }`}>
               <button
                 onClick={() => setActiveTab('core')}
                 className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'core' ? 'bg-purple-600 text-white shadow' : 'text-purple-200/70'
+                  activeTab === 'core' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
                 }`}
               >
                 Anlamlar
@@ -69,7 +67,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
               <button
                 onClick={() => setActiveTab('symbolism')}
                 className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'symbolism' ? 'bg-purple-600 text-white shadow' : 'text-purple-200/70'
+                  activeTab === 'symbolism' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
                 }`}
               >
                 Sembolizm
@@ -77,7 +75,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
               <button
                 onClick={() => setActiveTab('loveCareer')}
                 className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                  activeTab === 'loveCareer' ? 'bg-purple-600 text-white shadow' : 'text-purple-200/70'
+                  activeTab === 'loveCareer' ? 'bg-purple-600 text-white shadow' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
                 }`}
               >
                 Aşk & Kariyer
@@ -92,22 +90,22 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           <CardProLockOverlay cardNumber={card.number} onOpenPaywall={onOpenPaywall} />
         ) : (
           <div>
-            <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1 mb-2">
+            <h4 className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1 mb-2 ${
+              isDark ? 'text-amber-300' : 'text-purple-900'
+            }`}>
               <Compass className="w-3.5 h-3.5 text-purple-400" />
               {t('daily.guidanceTitle')}
             </h4>
-            <p className="text-xs text-purple-100 leading-relaxed bg-purple-950/40 p-3.5 rounded-2xl border border-purple-500/30 shadow-inner whitespace-pre-line">
+            <p className={`text-xs leading-relaxed p-3.5 rounded-2xl border shadow-inner whitespace-pre-line ${
+              isDark ? 'bg-purple-950/40 border-purple-500/30 text-purple-100' : 'bg-purple-50 border-purple-200 text-purple-900'
+            }`}>
               {t(`cards.${card.id}.guidance`, card.guidance)}
             </p>
           </div>
         )}
 
         <div className="pt-2 flex justify-end">
-          <Button
-            variant={isLearned ? 'secondary' : 'mystic'}
-            size="md"
-            onClick={() => toggleLearned(card.id)}
-          >
+          <Button variant={isLearned ? 'secondary' : 'mystic'} size="md" onClick={() => toggleLearned(card.id)}>
             {isLearned ? (
               <>
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />

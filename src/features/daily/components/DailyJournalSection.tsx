@@ -37,8 +37,8 @@ export const DailyJournalSection: React.FC<DailyJournalSectionProps> = ({
         rows={3}
         className={`w-full p-3 rounded-2xl border text-xs font-medium focus:outline-none transition-colors ${
           isDark
-            ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-500/80'
-            : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
+            ? 'bg-slate-900 border-purple-500/30 text-white'
+            : 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white shadow-sm'
         }`}
       />
       <div className="flex justify-between items-center pt-2">

@@ -31,7 +31,7 @@ export const MysticHubView: React.FC<MysticHubViewProps> = ({
     <div className="space-y-5 pb-12 font-sans">
       {/* Top Glass Sub-Tab Selector */}
       <div className={`flex items-center gap-1.5 p-1 rounded-2xl border backdrop-blur-md transition-colors ${
-        isDark ? 'bg-slate-900/80 border-purple-500/30' : 'bg-slate-200/80 border-slate-300'
+        isDark ? 'bg-slate-900/90 border-purple-500/30' : 'bg-slate-200/80 border-slate-300'
       }`}>
         {subTabs.map((st) => {
           const Icon = st.icon

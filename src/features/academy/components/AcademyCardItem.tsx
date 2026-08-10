@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { CheckCircle2, Sparkles, Lock, Play } from 'lucide-react'
 import { TarotCard } from '../../../types/tarot'
 import { CardBase } from '../../../components/atoms/CardBase'
+import { useTarotStore } from '../../../store/tarotStore'
 
 interface AcademyCardItemProps {
   card: TarotCard
@@ -18,13 +19,17 @@ export const AcademyCardItem: React.FC<AcademyCardItemProps> = ({
   onClick,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
   const isFreeLesson = card.number === 0
   const isLocked = !isFreeLesson && !isPro
 
   return (
     <CardBase
       onClick={onClick}
-      className="relative p-0 overflow-hidden flex flex-col justify-between h-48 bg-slate-900 text-white border-[0.5px] border-purple-500/30 shadow-md group hover:border-purple-400 cursor-pointer"
+      className={`relative p-0 overflow-hidden flex flex-col justify-between h-48 text-white border shadow-md group cursor-pointer ${
+        isDark ? 'bg-slate-900 border-purple-500/30 hover:border-purple-400' : 'bg-slate-900 border-purple-400/40 hover:border-purple-600'
+      }`}
     >
       {card.videoUrl ? (
         <video

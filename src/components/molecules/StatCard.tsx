@@ -1,5 +1,6 @@
 import React from 'react'
 import { CardBase } from '../atoms/CardBase'
+import { useTarotStore } from '../../store/tarotStore'
 
 interface StatCardProps {
   icon: React.ComponentType<{ className?: string }>
@@ -16,20 +17,31 @@ export const StatCard: React.FC<StatCardProps> = ({
   subtitle,
   color = 'text-purple-600 bg-purple-50',
 }) => {
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
+
   return (
-    <CardBase hoverEffect={false} className="flex items-center gap-4">
+    <CardBase hoverEffect={false} className="flex items-center gap-4 p-4 font-sans">
       <div className={`p-3.5 rounded-2xl ${color}`}>
         <Icon className="w-6 h-6" />
       </div>
       <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+        <p className={`text-xs font-semibold uppercase tracking-wider ${
+          isDark ? 'text-purple-200/80' : 'text-slate-600'
+        }`}>
           {title}
         </p>
-        <h4 className="text-2xl font-black text-slate-900 tracking-tight">
+        <h4 className={`text-2xl font-black tracking-tight ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
           {value}
         </h4>
         {subtitle && (
-          <p className="text-xs font-medium text-slate-400 mt-0.5">{subtitle}</p>
+          <p className={`text-xs font-medium mt-0.5 ${
+            isDark ? 'text-purple-200/70' : 'text-slate-500'
+          }`}>
+            {subtitle}
+          </p>
         )}
       </div>
     </CardBase>

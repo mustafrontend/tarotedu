@@ -10,9 +10,10 @@ import { HowToReadTarotModal } from './components/HowToReadTarotModal'
 
 interface LearnViewProps {
   onOpenPaywall?: () => void
+  onNavigate?: (tab: any) => void
 }
 
-export const LearnView: React.FC<LearnViewProps> = ({ onOpenPaywall }) => {
+export const LearnView: React.FC<LearnViewProps> = ({ onOpenPaywall, onNavigate }) => {
   const isPro = useTarotStore((state) => state.isPro)
   const learnedCards = useTarotStore((state) => state.learnedCards)
   const [selectedCard, setSelectedCard] = useState<TarotCard | null>(null)
@@ -59,6 +60,7 @@ export const LearnView: React.FC<LearnViewProps> = ({ onOpenPaywall }) => {
       <HowToReadTarotModal
         isOpen={isHowToReadOpen}
         onClose={() => setIsHowToReadOpen(false)}
+        onStartReading={(targetTab) => onNavigate?.(targetTab || 'daily')}
       />
     </div>
   )

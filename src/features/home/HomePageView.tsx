@@ -45,7 +45,7 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
       <AppleCardListSection onNavigate={onNavigate} />
 
       {/* 6. "Tarot Nasıl Bakılır?" Masterclass Section */}
-      <HowToReadHomeSection />
+      <HowToReadHomeSection onNavigate={onNavigate} />
 
       {/* 7. Stats Bento Overview */}
       <StatsOverviewSection

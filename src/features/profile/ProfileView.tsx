@@ -38,9 +38,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
-          isDark ? 'text-white' : 'text-slate-900'
-        }`}>
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
           <User className={`w-6 h-6 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           {t('profile.title')}
         </h2>
@@ -93,8 +91,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
             onChange={(e) => setBirthDate(e.target.value)}
             className={`flex-1 p-2.5 rounded-2xl border text-xs font-medium transition-colors ${
               isDark
-                ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:outline-none focus:border-purple-400 [color-scheme:dark]'
-                : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 shadow-sm [color-scheme:light]'
+                ? 'bg-slate-900 border-purple-500/30 text-white [color-scheme:dark]'
+                : 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white shadow-sm [color-scheme:light]'
             }`}
           />
           <Button variant="primary" size="sm" onClick={calculateLifePath}>
@@ -104,9 +102,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
 
         {lifePathResult !== null && (
           <div className={`p-4 rounded-2xl border flex items-center justify-between shadow-inner ${
-            isDark
-              ? 'bg-purple-950/60 border-purple-500/30'
-              : 'bg-purple-50 border-purple-200'
+            isDark ? 'bg-purple-950/60 border-purple-500/30' : 'bg-purple-50 border-purple-200'
           }`}>
             <div>
               <p className={`text-xs font-bold ${isDark ? 'text-purple-200' : 'text-purple-900'}`}>{t('profile.yourLifePath')}</p>
@@ -142,11 +138,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onOpenPaywall }) => {
       {/* App Store Legal & Submission Checklist Section */}
       <AppStoreLegalSection />
 
-      <ModalBase
-        isOpen={isLangOpen}
-        onClose={() => setIsLangOpen(false)}
-        title={t('onboarding.welcome')}
-      >
+      <ModalBase isOpen={isLangOpen} onClose={() => setIsLangOpen(false)} title={t('onboarding.welcome')}>
         <LanguagePicker onSelect={() => setIsLangOpen(false)} />
       </ModalBase>
     </div>

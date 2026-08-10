@@ -45,8 +45,8 @@ export const DailyIntentionForm: React.FC<DailyIntentionFormProps> = ({
                 ? 'border-rose-500/80 bg-rose-950/20 focus:border-rose-400 text-white'
                 : 'border-rose-500 bg-rose-50 focus:border-rose-600 text-slate-900'
               : isDark
-              ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
-              : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
+              ? 'bg-slate-900 border-purple-500/30 text-white'
+              : 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white shadow-sm'
           }`}
         />
         {validationError && (

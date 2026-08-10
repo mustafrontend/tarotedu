@@ -54,7 +54,7 @@ export const SpreadSelectorBar: React.FC<SpreadSelectorBarProps> = ({
                 isSelected
                   ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.4)]'
                   : isDark
-                  ? 'bg-slate-900/80 text-slate-300 border-purple-500/30 hover:bg-slate-800/90 hover:text-white'
+                  ? 'bg-slate-900/90 text-slate-300 border-purple-500/30 hover:bg-slate-800/90 hover:text-white'
                   : 'bg-slate-200/80 text-slate-700 border-slate-300 hover:bg-slate-300 hover:text-slate-900'
               }`}
             >

@@ -2,6 +2,7 @@ import React from 'react'
 import { Sun, BookOpen, Sparkles, Wand2, Music, User } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { CardBase } from '../atoms/CardBase'
+import { useTarotStore } from '../../store/tarotStore'
 
 interface QuickActionsSheetProps {
   onSelectAction: (action: string) => void
@@ -11,6 +12,8 @@ export const QuickActionsSheet: React.FC<QuickActionsSheetProps> = ({
   onSelectAction,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
 
   const actions = [
     {
@@ -58,23 +61,25 @@ export const QuickActionsSheet: React.FC<QuickActionsSheetProps> = ({
   ]
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-sans">
       {actions.map((action) => {
         const Icon = action.icon
         return (
           <CardBase
             key={action.id}
             onClick={() => onSelectAction(action.id)}
-            className="flex flex-col gap-2 p-4 border-[0.5px] border-slate-200"
+            className={`flex flex-col gap-2 p-4 border transition-colors ${
+              isDark ? 'bg-slate-900/90 border-purple-500/30 text-white' : 'bg-white border-slate-200 text-slate-900 shadow-sm'
+            }`}
           >
             <div className={`w-9 h-9 rounded-2xl ${action.color} flex items-center justify-center shadow-sm`}>
               <Icon className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-900 tracking-tight">
+              <h4 className={`text-xs font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 {action.title}
               </h4>
-              <p className="text-[10px] text-slate-400 line-clamp-1 mt-0.5">
+              <p className={`text-[10px] line-clamp-1 mt-0.5 font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
                 {action.subtitle}
               </p>
             </div>

@@ -43,7 +43,12 @@ export default function App() {
   const renderView = () => {
     switch (activeTab) {
       case 'learn':
-        return <LearnView onOpenPaywall={() => setIsPaywallOpen(true)} />
+        return (
+          <LearnView
+            onOpenPaywall={() => setIsPaywallOpen(true)}
+            onNavigate={(tab) => setActiveTab(tab)}
+          />
+        )
       case 'daily':
         return (
           <MysticHubView

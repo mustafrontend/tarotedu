@@ -22,11 +22,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
   const [prompt, setPrompt] = useState('')
   const [validationError, setValidationError] = useState<string | null>(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [oracleAnswer, setOracleAnswer] = useState<{
-    cardName: string
-    cardEmoji: string
-    response: string
-  } | null>(null)
+  const [oracleAnswer, setOracleAnswer] = useState<{ cardName: string; cardEmoji: string; response: string } | null>(null)
 
   const handleConsult = () => {
     const valid = validateIntentionText(prompt)
@@ -35,12 +31,10 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
       soundService.playClick()
       return
     }
-
     if (!isPro) {
       onOpenPaywall()
       return
     }
-
     setValidationError(null)
     setIsAnalyzing(true)
     setOracleAnswer(null)
@@ -51,15 +45,13 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
       setIsAnalyzing(false)
       soundService.playMysticChime()
       const localizedName = t(`cards.${card.id}.name`, card.name)
-      const localizedGuidance = t(`cards.${card.id}.guidance`, card.guidance)
-      const localizedUpright = t(`cards.${card.id}.upright`, card.meaning.upright)
       setOracleAnswer({
         cardName: localizedName,
         cardEmoji: '🔮',
         response: t('oracle.answerTemplate', {
           cardName: localizedName,
-          guidance: localizedGuidance,
-          theme: localizedUpright,
+          guidance: t(`cards.${card.id}.guidance`, card.guidance),
+          theme: t(`cards.${card.id}.upright`, card.meaning.upright),
         }),
       })
     }, 1200)
@@ -68,9 +60,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
   return (
     <div className="space-y-6 pb-12 font-sans">
       <div className="space-y-1">
-        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${
-          isDark ? 'text-white' : 'text-slate-900'
-        }`}>
+        <h2 className={`text-2xl font-black tracking-tight flex items-center gap-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
           <Wand2 className={`w-6 h-6 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
           {t('oracle.title')}
         </h2>
@@ -92,8 +82,8 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
                 ? 'border-rose-500/80 bg-rose-950/20 focus:border-rose-400 text-white'
                 : 'border-rose-500 bg-rose-50 focus:border-rose-600 text-slate-900'
               : isDark
-              ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
-              : 'bg-slate-100/80 border-slate-300 text-slate-900 placeholder-slate-500 focus:bg-white focus:border-purple-600 shadow-inner'
+              ? 'bg-slate-900 border-purple-500/30 text-white'
+              : 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white shadow-sm'
           }`}
         />
 
@@ -102,9 +92,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             className={`flex items-center gap-1.5 text-xs font-bold p-2.5 rounded-xl border ${
-              isDark
-                ? 'bg-rose-950/60 border-rose-500/40 text-rose-300'
-                : 'bg-rose-50 border-rose-300 text-rose-700'
+              isDark ? 'bg-rose-950/60 border-rose-500/40 text-rose-300' : 'bg-rose-50 border-rose-300 text-rose-700'
             }`}
           >
             <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
@@ -116,13 +104,7 @@ export const TarotOracleView: React.FC<TarotOracleViewProps> = ({ onOpenPaywall 
           <span className={`text-[11px] font-medium ${isDark ? 'text-purple-200/70' : 'text-slate-600'}`}>
             {t('oracle.helperHint')}
           </span>
-          <Button
-            variant="mystic"
-            size="md"
-            isLoading={isAnalyzing}
-            onClick={handleConsult}
-            disabled={!prompt.trim()}
-          >
+          <Button variant="mystic" size="md" isLoading={isAnalyzing} onClick={handleConsult} disabled={!prompt.trim()}>
             {!isPro ? <Crown className="w-4 h-4 mr-1 text-amber-300" /> : <Send className="w-4 h-4 mr-1" />}
             <span>{t('oracle.askBtn')}</span>
           </Button>

@@ -33,7 +33,11 @@ export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
     >
       <CardBase hoverEffect={false} className="space-y-3 p-4">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300 bg-purple-950/80 border border-purple-500/30 px-2.5 py-0.5 rounded-full">
+          <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+            isDark
+              ? 'text-amber-300 bg-purple-950/80 border-purple-500/30'
+              : 'text-purple-900 bg-purple-100 border-purple-300'
+          }`}>
             {t(`spreads.positions.${readingCard.positionName}`, {
               defaultValue: readingCard.positionName,
             })}

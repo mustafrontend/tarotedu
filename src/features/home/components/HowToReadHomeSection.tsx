@@ -5,7 +5,11 @@ import { CardBase } from '../../../components/atoms/CardBase'
 import { HowToReadTarotModal } from '../../academy/components/HowToReadTarotModal'
 import { useTarotStore } from '../../../store/tarotStore'
 
-export const HowToReadHomeSection: React.FC = () => {
+interface HowToReadHomeSectionProps {
+  onNavigate?: (tab: any) => void
+}
+
+export const HowToReadHomeSection: React.FC<HowToReadHomeSectionProps> = ({ onNavigate }) => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const theme = useTarotStore((state) => state.theme)
@@ -107,6 +111,7 @@ export const HowToReadHomeSection: React.FC = () => {
       <HowToReadTarotModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onStartReading={(targetTab) => onNavigate?.(targetTab || 'daily')}
       />
     </div>
   )

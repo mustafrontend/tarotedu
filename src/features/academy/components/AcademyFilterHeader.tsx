@@ -74,15 +74,15 @@ export const AcademyFilterHeader: React.FC<AcademyFilterHeaderProps> = ({
             placeholder={t('academy.searchPlaceholder')}
             className={`w-full pl-9 pr-4 py-2.5 rounded-2xl text-xs font-medium focus:outline-none transition-colors border ${
               isDark
-                ? 'bg-slate-900 border-purple-500/30 text-white placeholder-slate-400 focus:border-purple-400'
-                : 'bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 shadow-sm'
+                ? 'bg-slate-900 border-purple-500/30 text-white'
+                : 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white shadow-sm'
             }`}
           />
         </div>
 
         <div className={`flex items-center gap-1.5 p-1 rounded-2xl border backdrop-blur-md transition-colors ${
           isDark
-            ? 'bg-slate-900/80 border-purple-500/30'
+            ? 'bg-slate-900/90 border-purple-500/30'
             : 'bg-slate-200/80 border-slate-300'
         }`}>
           <button

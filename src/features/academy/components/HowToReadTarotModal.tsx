@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Sparkles, Compass, ChevronRight, Smartphone, Layers } from 'lucide-react'
+import { Sparkles, Compass, ChevronRight, Smartphone, Layers, Wand2 } from 'lucide-react'
 import { ModalBase } from '../../../components/atoms/ModalBase'
 import { Button } from '../../../components/atoms/Button'
+import { useTarotStore } from '../../../store/tarotStore'
 
 interface HowToReadTarotModalProps {
   isOpen: boolean
   onClose: () => void
+  onStartReading?: (tab?: 'daily' | 'spreads' | 'oracle') => void
 }
 
 export const HowToReadTarotModal: React.FC<HowToReadTarotModalProps> = ({
   isOpen,
   onClose,
+  onStartReading,
 }) => {
   const { t } = useTranslation()
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
   const [guideMode, setGuideMode] = useState<'app' | 'physical'>('app')
   const [activeStep, setActiveStep] = useState(0)
 
@@ -34,15 +39,22 @@ export const HowToReadTarotModal: React.FC<HowToReadTarotModalProps> = ({
   const steps = guideMode === 'app' ? appStepKeys : physicalStepKeys
   const current = steps[activeStep] || steps[0]
 
+  const handleStartCTA = (targetTab: 'daily' | 'spreads' | 'oracle' = 'daily') => {
+    onClose()
+    if (onStartReading) onStartReading(targetTab)
+  }
+
   return (
     <ModalBase isOpen={isOpen} onClose={onClose} title={t('howToRead.modalTitle', '🔮 Tarot Nasıl Bakılır? (Tam Rehber)')} maxWidth="lg">
       <div className="space-y-4 font-sans">
-        {/* Mode Selector */}
-        <div className="flex bg-slate-900 p-1 rounded-2xl border border-purple-500/30 text-xs font-bold">
+        {/* Mode Selector Top SubTab Bar */}
+        <div className={`flex p-1 rounded-2xl border text-xs font-bold transition-colors ${
+          isDark ? 'bg-slate-900/90 border-purple-500/30' : 'bg-slate-200/80 border-slate-300'
+        }`}>
           <button
             onClick={() => { setGuideMode('app'); setActiveStep(0); }}
             className={`flex-1 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all ${
-              guideMode === 'app' ? 'bg-purple-600 text-amber-300 shadow-md' : 'text-purple-200/70 hover:text-white'
+              guideMode === 'app' ? 'bg-purple-600 text-white shadow-md' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
             }`}
           >
             <Smartphone className="w-4 h-4" />
@@ -51,7 +63,7 @@ export const HowToReadTarotModal: React.FC<HowToReadTarotModalProps> = ({
           <button
             onClick={() => { setGuideMode('physical'); setActiveStep(0); }}
             className={`flex-1 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all ${
-              guideMode === 'physical' ? 'bg-purple-600 text-amber-300 shadow-md' : 'text-purple-200/70 hover:text-white'
+              guideMode === 'physical' ? 'bg-purple-600 text-white shadow-md' : isDark ? 'text-purple-200/70 hover:text-white' : 'text-slate-700 hover:text-slate-900'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -60,15 +72,15 @@ export const HowToReadTarotModal: React.FC<HowToReadTarotModalProps> = ({
         </div>
 
         {/* Step Numbers */}
-        <div className="flex justify-between items-center bg-slate-950 p-1.5 rounded-2xl border border-purple-500/20">
+        <div className={`flex justify-between items-center p-1.5 rounded-2xl border ${
+          isDark ? 'bg-slate-950 border-purple-500/20' : 'bg-slate-100 border-slate-200'
+        }`}>
           {steps.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveStep(idx)}
               className={`w-9 h-9 rounded-xl text-xs font-black transition-all ${
-                activeStep === idx
-                  ? 'bg-amber-400 text-slate-950 shadow-md scale-105'
-                  : 'text-purple-300/60 hover:text-white'
+                activeStep === idx ? 'bg-amber-400 text-slate-950 shadow-md scale-105' : isDark ? 'text-purple-300/60 hover:text-white' : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               #{idx + 1}
@@ -77,44 +89,51 @@ export const HowToReadTarotModal: React.FC<HowToReadTarotModalProps> = ({
         </div>
 
         {/* Active Content */}
-        <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950 p-5 rounded-2xl border border-purple-500/30 space-y-3 shadow-xl">
-          <div className="flex items-center gap-2 text-amber-300 font-black text-sm">
-            <Sparkles className="w-4 h-4" />
+        <div className={`p-5 rounded-2xl border space-y-3 shadow-xl ${
+          isDark ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950 border-purple-500/30 text-white' : 'bg-gradient-to-br from-purple-50 via-indigo-50 to-slate-50 border-purple-200 text-slate-900'
+        }`}>
+          <div className={`flex items-center gap-2 font-black text-sm ${isDark ? 'text-amber-300' : 'text-purple-900'}`}>
+            <Sparkles className="w-4 h-4 text-amber-500" />
             <h3>{t(current.titleKey)}</h3>
           </div>
-          <p className="text-xs text-purple-100 font-medium leading-relaxed">
+          <p className={`text-xs font-medium leading-relaxed ${isDark ? 'text-purple-100' : 'text-slate-700'}`}>
             {t(current.descKey)}
           </p>
 
-          <div className="bg-purple-950/60 p-3 rounded-xl border border-purple-500/30 text-[11px] font-bold text-amber-300 flex items-center gap-2">
-            <Compass className="w-4 h-4 text-purple-400 shrink-0" />
+          <div className={`p-3 rounded-xl border text-[11px] font-bold flex items-center gap-2 ${
+            isDark ? 'bg-purple-950/60 border-purple-500/30 text-amber-300' : 'bg-purple-100 border-purple-200 text-purple-900'
+          }`}>
+            <Compass className="w-4 h-4 text-purple-500 shrink-0" />
             <span>{t(current.tipKey)}</span>
           </div>
         </div>
 
-        {/* Bottom Actions */}
-        <div className="flex items-center justify-between pt-1">
-          <span className="text-xs text-purple-200/60 font-semibold">
-            {t('howToRead.stepProgress', { current: activeStep + 1, total: steps.length })}
-          </span>
-          <Button
-            variant="mystic"
-            size="sm"
-            onClick={() => {
-              if (activeStep < steps.length - 1) {
-                setActiveStep(activeStep + 1)
-              } else {
-                onClose()
-              }
-            }}
+        {/* Prominent Direct CTA Button */}
+        <div className="pt-1 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <button
+            onClick={() => handleStartCTA('daily')}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 hover:brightness-110 text-slate-950 px-5 py-2.5 rounded-2xl text-xs font-black shadow-lg shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
           >
-            <span>
-              {activeStep < steps.length - 1
-                ? t('howToRead.nextStep', 'Sonraki Adım')
-                : t('howToRead.finish', 'Tamamla')}
-            </span>
-            <ChevronRight className="w-4 h-4 ml-1" />
-          </Button>
+            <Wand2 className="w-4 h-4 fill-current" />
+            <span>{t('howToRead.startReadingCTA', '🔮 Bakmaya Başla (Hemen Kart Çek)')}</span>
+          </button>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <Button
+              variant="mystic"
+              size="sm"
+              onClick={() => {
+                if (activeStep < steps.length - 1) {
+                  setActiveStep(activeStep + 1)
+                } else {
+                  handleStartCTA('daily')
+                }
+              }}
+            >
+              <span>{activeStep < steps.length - 1 ? t('howToRead.nextStep', 'Sonraki Adım') : t('howToRead.finish', 'Tamamla & Bak')}</span>
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
         </div>
       </div>
     </ModalBase>
