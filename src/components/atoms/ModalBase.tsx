@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
+import { useTarotStore } from '../../store/tarotStore'
 
 interface ModalBaseProps {
   isOpen: boolean
@@ -17,6 +18,9 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
   title,
   maxWidth = 'md',
 }) => {
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
+
   const maxWidthClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
@@ -33,7 +37,7 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
+            className={`fixed inset-0 backdrop-blur-md ${isDark ? 'bg-slate-950/80' : 'bg-slate-900/60'}`}
           />
 
           <motion.div
@@ -41,11 +45,15 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className={`relative w-full ${maxWidthClasses[maxWidth]} bg-slate-950/95 text-white rounded-3xl shadow-2xl border-[0.5px] border-purple-500/40 backdrop-blur-2xl overflow-hidden z-10 p-6 font-sans`}
+            className={`relative w-full ${maxWidthClasses[maxWidth]} rounded-3xl shadow-2xl backdrop-blur-2xl overflow-hidden z-10 p-6 font-sans border transition-colors ${
+              isDark
+                ? 'bg-slate-950/95 text-white border-purple-500/40'
+                : 'bg-white text-slate-900 border-slate-200 shadow-2xl'
+            }`}
           >
             <div className="flex items-center justify-between mb-4">
               {title ? (
-                <h3 className="text-lg font-black text-white tracking-tight">
+                <h3 className={`text-lg font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   {title}
                 </h3>
               ) : (
@@ -53,7 +61,9 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
               )}
               <button
                 onClick={onClose}
-                className="p-2 text-purple-300 hover:text-white rounded-full hover:bg-purple-900/50 transition-colors"
+                className={`p-2 rounded-full transition-colors ${
+                  isDark ? 'text-purple-300 hover:text-white hover:bg-purple-900/50' : 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                }`}
               >
                 <X className="w-5 h-5" />
               </button>

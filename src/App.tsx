@@ -19,6 +19,8 @@ export default function App() {
   const [mounted, setMounted] = useState(false)
 
   const onboardingCompleted = useTarotStore((state) => state.onboardingCompleted)
+  const theme = useTarotStore((state) => state.theme)
+  const isDark = theme === 'dark'
   const [showOnboarding, setShowOnboarding] = useState(false)
 
   useEffect(() => {
@@ -78,7 +80,11 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-purple-50 font-sans flex flex-col selection:bg-purple-700 selection:text-white">
+    <div
+      className={`min-h-screen font-sans flex flex-col selection:bg-purple-700 selection:text-white transition-colors duration-200 ${
+        isDark ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'
+      }`}
+    >
       <Header onOpenPaywall={() => setIsPaywallOpen(true)} />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 pt-4 pb-24">
