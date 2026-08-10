@@ -1,0 +1,37 @@
+{
+  "app": { "title": "TarotEdu PRO", "tagline": "精通伟特塔罗体系", "badge": "神秘塔罗学习平台" },
+  "nav": { "home": "首页", "learn": "学院", "daily": "每日一牌", "spreads": "牌阵", "oracle": "神秘神谕", "player": "神秘之音", "profile": "个人" },
+  "onboarding": {
+    "welcome": "选择您的语言",
+    "step1Title": "精通78张塔罗牌",
+    "step1Sub": "深入学习传统韦特塔罗的象征含义。",
+    "step1Highlight": "📚 韦特塔罗学院",
+    "step2Title": "个性化每日抽牌",
+    "step2Sub": "设定每日意图并撰写反思日记。",
+    "step2Highlight": "🎯 每日一牌与日记",
+    "step3Title": "5种互动神圣牌阵",
+    "step3Sub": "凯尔特十字、三牌阵、爱情与事业解读。",
+    "step3Highlight": "✨ 神圣牌阵",
+    "step4Title": "神秘神谕与528Hz冥想音效",
+    "step4Sub": "向塔罗神谕提问，伴随528Hz频率冥想。",
+    "step4Highlight": "🔮 神秘神谕与528Hz音效",
+    "start": "开始探索", "next": "下一步", "back": "返回", "skip": "跳过"
+  },
+  "paywall": {
+    "title": "TarotEdu PRO 权限", "subtitle": "解锁完整塔罗学院与神秘神谕",
+    "annual": "年度会员", "annualSub": "3天免费试用，之后¥128/年",
+    "monthly": "月度会员", "monthlySub": "¥30/月",
+    "lifetime": "终身会员", "lifetimeSub": "一次性支付¥258",
+    "feature1": "完整78张塔罗牌数据库与解析", "feature2": "无限次每日抽牌与记录",
+    "feature3": "全部5种神圣牌阵深度解读", "feature4": "神秘塔罗神谕与能量分析",
+    "feature5": "528Hz索尔菲吉欧频率播放器", "cta": "开启3天免费试用",
+    "restore": "恢复购买", "guarantee": "随时在 App Store 设置中取消"
+  },
+  "hero": { "badge": "韦特塔罗体系 🔮", "title": "开启神圣智慧", "subtitle": "您的每日塔罗学习与灵性指引圣所。", "ctaDaily": "抽取今日塔罗", "ctaLearn": "浏览塔罗学院", "streak": "连续天数", "learned": "已学卡牌", "readings": "解读记录" },
+  "daily": { "title": "每日指引", "subtitle": "设定意图并抽取今日指引牌", "intentionPlaceholder": "今天您希望获得什么智慧指引？", "drawBtn": "洗牌并抽牌", "upright": "正位", "reversed": "逆位", "guidanceTitle": "每日启示", "keywords": "核心关键词", "journalTitle": "反思日记", "saveJournal": "保存日记" },
+  "academy": { "title": "塔罗学院", "subtitle": "探索22张大阿卡纳", "all": "全部卡牌", "learned": "已掌握", "unlearned": "待学习", "markLearned": "标记为已掌握", "mastered": "已掌握 ✓", "uprightMeaning": "正位含义", "reversedMeaning": "逆位含义", "element": "元素", "astrology": "占星" },
+  "spreads": { "title": "神圣牌阵", "subtitle": "选择牌阵以获得深度塔罗解读", "threeCard": "三牌阵 (过去、现在、未来)", "celticCross": "凯尔特十字 (10张牌)", "horseshoe": "马蹄形牌阵", "career": "事业指引", "love": "爱情与关系", "drawCards": "翻开卡牌", "reset": "重新解读" },
+  "oracle": { "title": "神秘神谕", "subtitle": "向塔罗神谕提出您的疑问", "promptPlaceholder": "询问关于事业、爱情或人生抉择...", "askBtn": "咨询神谕", "analyzing": "正在调整卡牌能量..." },
+  "player": { "title": "神秘音效", "subtitle": "索尔菲吉欧频率冥想音乐", "solfeggio": "528Hz 蜕变频率", "cosmic": "宇宙风铃", "bell": "西藏磬音", "rain": "神秘雨声与篝火" },
+  "profile": { "title": "个人与生命灵数", "lifePath": "生命道路数", "birthDate": "出生日期", "calculate": "计算生命灵数", "settings": "应用设置", "language": "应用语言", "proStatus": "PRO会员状态", "unlimited": "PRO已激活", "upgrade": "升级至PRO" }
+}

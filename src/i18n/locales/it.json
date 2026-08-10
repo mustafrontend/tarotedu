@@ -1,0 +1,37 @@
+{
+  "app": { "title": "TarotEdu PRO", "tagline": "Impara il Tarot Rider-Waite", "badge": "Piattaforma Mistica" },
+  "nav": { "home": "Home", "learn": "Accademia", "daily": "Carta del Giorno", "spreads": "Letture", "oracle": "Oracolo Mistico", "player": "Suoni Mistici", "profile": "Profilo" },
+  "onboarding": {
+    "welcome": "Seleziona la tua lingua",
+    "step1Title": "Impara 78 Carte dei Tarocchi",
+    "step1Sub": "Scopri il simbolismo tradizionale Rider-Waite.",
+    "step1Highlight": "📚 Accademia dei Tarocchi",
+    "step2Title": "Carta del Giorno Personalizzata",
+    "step2Sub": "Allinea la tua energia con il diario delle intenzioni.",
+    "step2Highlight": "🎯 Carta del Giorno",
+    "step3Title": "5 Letture Mistiche Interattive",
+    "step3Sub": "Croce Celtica, 3 Carte, Amore e Lavoro.",
+    "step3Highlight": "✨ Letture Sacre",
+    "step4Title": "Oracolo Mistico e Frequenze 528Hz",
+    "step4Sub": "Consulta l'Oracolo e rilassati con suoni mistici.",
+    "step4Highlight": "🔮 Oracolo Mistico & Suoni 528Hz",
+    "start": "Inizia", "next": "Avanti", "back": "Indietro", "skip": "Salta"
+  },
+  "paywall": {
+    "title": "Accesso TarotEdu PRO", "subtitle": "Sblocca l'Accademia Completa e l'Oracolo Mistico",
+    "annual": "Pass Annuale", "annualSub": "3 giorni gratis poi €19.99/anno",
+    "monthly": "Pass Mensile", "monthlySub": "€4.99/mese",
+    "lifetime": "Accesso A Vita", "lifetimeSub": "Pagamento unico €39.99",
+    "feature1": "Database completo delle 78 carte", "feature2": "Estrazioni giornaliere illimitate",
+    "feature3": "Tutte le 5 letture sacre", "feature4": "Oracolo Mistico e analisi energia",
+    "feature5": "Lettore audio Solfeggio 528Hz", "cta": "Inizia Prova Gratuita 3 Giorni",
+    "restore": "Ripristina Acquisti", "guarantee": "Annulla quando vuoi su App Store"
+  },
+  "hero": { "badge": "Sistema Rider-Waite 🔮", "title": "Scopri la Saggezza Sacra", "subtitle": "Il tuo santuario per lo studio dei tarocchi.", "ctaDaily": "Carta del Giorno", "ctaLearn": "Accademia", "streak": "Giorni", "learned": "Carte", "readings": "Letture" },
+  "daily": { "title": "Guida del Giorno", "subtitle": "Imposta l'intenzione e pesca la carta", "intentionPlaceholder": "Quale saggezza cerchi oggi?", "drawBtn": "Mescola e Pesca", "upright": "Dritta", "reversed": "Rovesciata", "guidanceTitle": "Guida Giornaliera", "keywords": "Parole Chiave", "journalTitle": "Diario", "saveJournal": "Salva" },
+  "academy": { "title": "Accademia dei Tarocchi", "subtitle": "Esplora gli Arcani Maggiori", "all": "Tutte", "learned": "Imparate", "unlearned": "Da imparare", "markLearned": "Segna come imparata", "mastered": "Imparata ✓", "uprightMeaning": "Significato Dritto", "reversedMeaning": "Significato Rovesciato", "element": "Elemento", "astrology": "Astrologia" },
+  "spreads": { "title": "Letture Sacre", "subtitle": "Scegli una lettura per un'analisi profonda", "threeCard": "Tre Carte", "celticCross": "Croce Celtica", "horseshoe": "Ferro di Cavallo", "career": "Guida Carriera", "love": "Amore e Relazioni", "drawCards": "Svela Carte", "reset": "Nuova Lettura" },
+  "oracle": { "title": "Oracolo Mistico", "subtitle": "Fai una domanda all'Oracolo Mistico", "promptPlaceholder": "Chiedi su amore, lavoro o futuro...", "askBtn": "Consulta Oracolo", "analyzing": "Allineamento energie..." },
+  "player": { "title": "Suoni Mistici", "subtitle": "Frequenze Solfeggio per la meditazione", "solfeggio": "528Hz Trasformazione", "cosmic": "Campane Cosmiche", "bell": "Campana Tibetana", "rain": "Pioggia e Fuoco" },
+  "profile": { "title": "Profilo & Numerologia", "lifePath": "Numero del Cammino di Vita", "birthDate": "Data di Nascita", "calculate": "Calcola Numero", "settings": "Impostazioni", "language": "Lingua", "proStatus": "Stato PRO", "unlimited": "PRO Attivo", "upgrade": "Passa a PRO" }
+}

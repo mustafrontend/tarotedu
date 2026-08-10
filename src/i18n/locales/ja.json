@@ -1,0 +1,37 @@
+{
+  "app": { "title": "TarotEdu PRO", "tagline": "ライダー・ウェイト版タロットをマスター", "badge": "神秘的な学習プラットフォーム" },
+  "nav": { "home": "ホーム", "learn": "アカデミー", "daily": "今日のカード", "spreads": "スプレッド", "oracle": "オラクル", "player": "神秘的な音", "profile": "プロファイル" },
+  "onboarding": {
+    "welcome": "言語を選択してください",
+    "step1Title": "78枚のタロットカードをマスター",
+    "step1Sub": "伝統的なライダー・ウェイト版の象徴を学びます。",
+    "step1Highlight": "📚 タロットアカデミー",
+    "step2Title": "パーソナライズされた今日のカード",
+    "step2Sub": "意図の設定とジャーナルでエネルギーを整えます。",
+    "step2Highlight": "🎯 今日のカード＆日記",
+    "step3Title": "5つの神秘的なスプレッド",
+    "step3Sub": "ケルト十字、3枚引き、恋愛、仕事のリーディング。",
+    "step3Highlight": "✨ 聖なるスプレッド",
+    "step4Title": "神秘的なオラクル＆528Hzヒーリング",
+    "step4Sub": "タロットオラクルに質問し、528Hzの周波数で瞑想します。",
+    "step4Highlight": "🔮 神秘的なオラクル＆528Hzサウンド",
+    "start": "始める", "next": "次へ", "back": "戻る", "skip": "スキップ"
+  },
+  "paywall": {
+    "title": "TarotEdu PRO アクセス", "subtitle": "タロットアカデミーとオラクルをフル解除",
+    "annual": "年額プラン", "annualSub": "3日間無料体験、その後¥2,800/年",
+    "monthly": "月額プラン", "monthlySub": "¥700/月",
+    "lifetime": "買い切りプラン", "lifetimeSub": "一括払い ¥5,800",
+    "feature1": "全78枚のカードデータベースと解説", "feature2": "無制限のデイリーリーディング",
+    "feature3": "全5種類の聖なるスプレッド", "feature4": "神秘的なタロットオラクルとエネルギー分析",
+    "feature5": "528Hzソルフェジオ周波数プレイヤー", "cta": "3日間無料体験を開始",
+    "restore": "購入を復元", "guarantee": "App Storeの設定からいつでもキャンセル可能"
+  },
+  "hero": { "badge": "ライダー・ウェイト体系 🔮", "title": "聖なる知恵を解き明かす", "subtitle": "タロット学習と毎日のガイダンスのための聖域。", "ctaDaily": "今日のカードを引く", "ctaLearn": "アカデミーを見る", "streak": "連続日数", "learned": "学習カード", "readings": "リーディング数" },
+  "daily": { "title": "今日のガイダンス", "subtitle": "意図を設定してカードを引きます", "intentionPlaceholder": "今日どのようなアドバイスを求めていますか？", "drawBtn": "シャッフルしてカードを引く", "upright": "正位置", "reversed": "逆位置", "guidanceTitle": "今日の助言", "keywords": "キーワード", "journalTitle": "振り返り日記", "saveJournal": "保存" },
+  "academy": { "title": "タロットアカデミー", "subtitle": "大アルカナ22枚を探求", "all": "すべて", "learned": "習得済み", "unlearned": "未習得", "markLearned": "習得済みとしてマーク", "mastered": "習得済み ✓", "uprightMeaning": "正位置の意味", "reversedMeaning": "逆位置の意味", "element": "エレメント", "astrology": "占星術" },
+  "spreads": { "title": "聖なるスプレッド", "subtitle": "深層心理を読み解くスプレッドを選択", "threeCard": "スリーカード", "celticCross": "ケルト十字", "horseshoe": "ホースシュー", "career": "仕事のガイダンス", "love": "恋愛と人間関係", "drawCards": "カードを開く", "reset": "新しいリーディング" },
+  "oracle": { "title": "神秘的なオラクル", "subtitle": "タロットオラクルに質問する", "promptPlaceholder": "仕事、恋愛、人生の選択について質問してください...", "askBtn": "オラクルに相談", "analyzing": "カードのエネルギーを調整中..." },
+  "player": { "title": "神秘的なサウンド", "subtitle": "瞑想のためのソルフェジオ周波数", "solfeggio": "528Hz 変容の周波数", "cosmic": "コズミックチャイム", "bell": "チベタンシンギングボウル", "rain": "神秘の雨と炎" },
+  "profile": { "title": "プロフィール＆数秘術", "lifePath": "ライフパスナンバー", "birthDate": "生年月日", "calculate": "ナンバーを計算", "settings": "アプリ設定", "language": "言語設定", "proStatus": "PROステータス", "unlimited": "PRO有効", "upgrade": "PROにアップグレード" }
+}

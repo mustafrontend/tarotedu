@@ -1,0 +1,37 @@
+{
+  "app": { "title": "TarotEdu PRO", "tagline": "Meistere das Rider-Waite-Tarot", "badge": "Mystische Lernplattform" },
+  "nav": { "home": "Start", "learn": "Akademie", "daily": "Tageskarte", "spreads": "Legungen", "oracle": "Mystisches Orakel", "player": "Klänge", "profile": "Profil" },
+  "onboarding": {
+    "welcome": "Wähle deine Sprache",
+    "step1Title": "Meistere 78 Tarotkarten",
+    "step1Sub": "Lerne die Symbolik der Rider-Waite-Tradition.",
+    "step1Highlight": "📚 Tarot-Akademie",
+    "step2Title": "Tägliches Kartenziehen",
+    "step2Sub": "Setze Intentionen und führe ein Tagebuch.",
+    "step2Highlight": "🎯 Tageskarte & Journal",
+    "step3Title": "5 Interaktive Legesysteme",
+    "step3Sub": "Keltisches Kreuz, 3-Karten, Liebe & Karriere.",
+    "step3Highlight": "✨ Heilige Legungen",
+    "step4Title": "Mystisches Orakel & Solfeggio Klänge",
+    "step4Sub": "Befrage das Orakel und entspanne mit 528Hz Klängen.",
+    "step4Highlight": "🔮 Mystisches Orakel & 528Hz Klänge",
+    "start": "Starten", "next": "Weiter", "back": "Zurück", "skip": "Überspringen"
+  },
+  "paywall": {
+    "title": "TarotEdu PRO Zugang", "subtitle": "Schalte alle Legungen & das Mystische Orakel frei",
+    "annual": "Jahresabo", "annualSub": "3 Tage kostenlos, dann 19,99 €/Jahr",
+    "monthly": "Monatsabo", "monthlySub": "4,99 €/Monat",
+    "lifetime": "Lebenslanger Zugang", "lifetimeSub": "Einmalig 39,99 €",
+    "feature1": "Vollständige 78-Karten-Datenbank", "feature2": "Unbegrenztes tägliches Ziehen",
+    "feature3": "Alle 5 Legesysteme", "feature4": "Mystisches Orakel & Energieanalyse",
+    "feature5": "528Hz Solfeggio Audio-Player", "cta": "3 Tage kostenlos testen",
+    "restore": "Einkäufe wiederherstellen", "guarantee": "Jederzeit im App Store kündbar"
+  },
+  "hero": { "badge": "Rider-Waite System 🔮", "title": "Entdecke heilige Weisheit", "subtitle": "Dein täglicher Begleiter für Tarot-Wissen.", "ctaDaily": "Tageskarte ziehen", "ctaLearn": "Zur Akademie", "streak": "Tage-Serie", "learned": "Karten", "readings": "Legungen" },
+  "daily": { "title": "Tagesführung", "subtitle": "Setze deine Intention", "intentionPlaceholder": "Welchen Rat suchst du heute?", "drawBtn": "Mischen & Karte ziehen", "upright": "Aufrecht", "reversed": "Umgekehrt", "guidanceTitle": "Tagesbotschaft", "keywords": "Schlüsselwörter", "journalTitle": "Tagebuch", "saveJournal": "Speichern" },
+  "academy": { "title": "Tarot Akademie", "subtitle": "Erkunde die Große Arkana", "all": "Alle", "learned": "Gelernt", "unlearned": "Zu lernen", "markLearned": "Als gelernt markieren", "mastered": "Gelernt ✓", "uprightMeaning": "Aufrechte Bedeutung", "reversedMeaning": "Umgekehrte Bedeutung", "element": "Element", "astrology": "Astrologie" },
+  "spreads": { "title": "Heilige Legungen", "subtitle": "Wähle ein Legesystem für tiefe Einblicke", "threeCard": "Drei Karten", "celticCross": "Keltisches Kreuz", "horseshoe": "Hufeisen", "career": "Karriere-Führung", "love": "Liebe & Beziehung", "drawCards": "Karten legen", "reset": "Neue Legung" },
+  "oracle": { "title": "Mystisches Orakel", "subtitle": "Stelle dem Tarot-Orakel eine Frage", "promptPlaceholder": "Frage nach Liebe, Karriere oder Lebensweg...", "askBtn": "Orakel befragen", "analyzing": "Energien werden ausgerichtet..." },
+  "player": { "title": "Mystische Klänge", "subtitle": "Solfeggio-Frequenzen für Meditation", "solfeggio": "528Hz Transformation", "cosmic": "Kosmische Glocken", "bell": "Tibetische Schale", "rain": "Regen & Feuer" },
+  "profile": { "title": "Profil & Numerologie", "lifePath": "Lebenszahl", "birthDate": "Geburtsdatum", "calculate": "Zahl berechnen", "settings": "Einstellungen", "language": "Sprache", "proStatus": "PRO Status", "unlimited": "PRO Aktiv", "upgrade": "Auf PRO upgraden" }
+}

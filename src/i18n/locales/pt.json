@@ -1,0 +1,37 @@
+{
+  "app": { "title": "TarotEdu PRO", "tagline": "Domine o Tarot Rider-Waite", "badge": "Plataforma Mística" },
+  "nav": { "home": "Início", "learn": "Academia", "daily": "Carta do Dia", "spreads": "Tiragens", "oracle": "Oráculo Místico", "player": "Sons Místicos", "profile": "Perfil" },
+  "onboarding": {
+    "welcome": "Selecione o Idioma",
+    "step1Title": "Domine 78 Cartas do Tarot",
+    "step1Sub": "Aprenda o simbolismo tradicional do Tarot Rider-Waite.",
+    "step1Highlight": "📚 Academia de Tarot",
+    "step2Title": "Tiragem Diária Personalizada",
+    "step2Sub": "Alinhe sua energia com o diário de intenções.",
+    "step2Highlight": "🎯 Tiragem Diária",
+    "step3Title": "5 Tiragens Místicas Interativas",
+    "step3Sub": "Cruz Céltica, 3 Cartas, Amor e Carreira.",
+    "step3Highlight": "✨ Tiragens Sagradas",
+    "step4Title": "Oráculo Místico e Frequências 528Hz",
+    "step4Sub": "Consulte o Oráculo Místico e relaxe com áudio místico.",
+    "step4Highlight": "🔮 Oráculo Místico & Sons 528Hz",
+    "start": "Começar", "next": "Continuar", "back": "Voltar", "skip": "Pular"
+  },
+  "paywall": {
+    "title": "Acesso TarotEdu PRO", "subtitle": "Desbloqueie a Academia Completa e o Oráculo Místico",
+    "annual": "Passe Anual", "annualSub": "3 dias grátis, depois $19.99/ano",
+    "monthly": "Passe Mensal", "monthlySub": "$4.99/mês",
+    "lifetime": "Acesso Vitalício", "lifetimeSub": "Pagamento único $39.99",
+    "feature1": "Banco de dados completo de 78 cartas", "feature2": "Tiragens diárias ilimitadas",
+    "feature3": "Todas as 5 tiragens sagradas", "feature4": "Oráculo Místico e Análise de Energia",
+    "feature5": "Player de áudio 528Hz Solfeggio", "cta": "Iniciar 3 Dias Grátis",
+    "restore": "Restaurar Compras", "guarantee": "Cancele a qualquer momento na App Store"
+  },
+  "hero": { "badge": "Sistema Rider-Waite 🔮", "title": "Descubra a Sabedoria Sagrada", "subtitle": "Seu santuário diário para estudo de tarot.", "ctaDaily": "Tirar Carta do Dia", "ctaLearn": "Ver Academia", "streak": "Sequência", "learned": "Cartas", "readings": "Leituras" },
+  "daily": { "title": "Guia do Dia", "subtitle": "Defina sua intenção e tire sua carta", "intentionPlaceholder": "Qual sabedoria você busca hoje?", "drawBtn": "Embaralhar e Tirar", "upright": "Direta", "reversed": "Invertida", "guidanceTitle": "Orientação Diária", "keywords": "Palavras-Chave", "journalTitle": "Diário", "saveJournal": "Salvar" },
+  "academy": { "title": "Academia de Tarot", "subtitle": "Explore os Arcanos Maiores", "all": "Todas", "learned": "Aprendidas", "unlearned": "A Aprender", "markLearned": "Marcar como Aprendida", "mastered": "Aprendida ✓", "uprightMeaning": "Significado Direto", "reversedMeaning": "Significado Invertido", "element": "Elemento", "astrology": "Astrologia" },
+  "spreads": { "title": "Tiragens Sagradas", "subtitle": "Escolha uma tiragem para uma análise profunda", "threeCard": "Três Cartas", "celticCross": "Cruz Céltica", "horseshoe": "Herradura", "career": "Guia de Carreira", "love": "Amor e Relacionamento", "drawCards": "Tirar Cartas", "reset": "Nova Tiragem" },
+  "oracle": { "title": "Oráculo Místico", "subtitle": "Faça uma pergunta ao Oráculo de Tarot Místico", "promptPlaceholder": "Pergunte sobre amor, carreira ou destino...", "askBtn": "Consultar Oráculo", "analyzing": "Alinhando energias..." },
+  "player": { "title": "Sons Místicos", "subtitle": "Frequências Solfeggio para meditação", "solfeggio": "528Hz Transformação", "cosmic": "Sinos Cósmicos", "bell": "Tigela Tibetana", "rain": "Chuva e Fogo" },
+  "profile": { "title": "Perfil e Numerologia", "lifePath": "Número do Caminho de Vida", "birthDate": "Data de Nascimento", "calculate": "Calcular Número", "settings": "Configurações", "language": "Idioma", "proStatus": "Status PRO", "unlimited": "PRO Ativo", "upgrade": "Obter PRO" }
+}
