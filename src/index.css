@@ -45,3 +45,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a855f7;
 }
+
+/* Prevent iOS Safari / WebView auto-zoom on input & textarea focus */
+input, textarea, select {
+  font-size: 16px !important;
+  touch-action: manipulation;
+}
+
