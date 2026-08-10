@@ -12,7 +12,7 @@ export const CardDetailVisual: React.FC<CardDetailVisualProps> = ({
   localizedName,
 }) => {
   return (
-    <div className="w-40 h-64 rounded-2xl bg-slate-900 border-2 border-purple-400/50 shadow-xl overflow-hidden relative shrink-0">
+    <div className="w-36 h-56 sm:w-40 sm:h-64 rounded-2xl bg-slate-900 border-2 border-purple-400/50 shadow-xl overflow-hidden relative shrink-0">
       {videoUrl ? (
         <video
           autoPlay

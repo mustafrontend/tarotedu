@@ -84,7 +84,12 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-lg max-h-[88vh] overflow-y-auto bg-slate-950/95 text-white rounded-3xl shadow-2xl border-[0.5px] border-purple-500/40 backdrop-blur-2xl z-10 p-5 sm:p-7"
+          style={{
+            maxHeight: 'calc(100dvh - env(safe-area-inset-top, 44px) - env(safe-area-inset-bottom, 24px) - 32px)',
+            marginTop: 'calc(env(safe-area-inset-top, 0px) + 16px)',
+            marginBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)',
+          }}
+          className="relative w-full max-w-lg overflow-y-auto bg-slate-950/95 text-white rounded-3xl shadow-2xl border-[0.5px] border-purple-500/40 backdrop-blur-2xl z-10 p-5 sm:p-7"
         >
           <button
             onClick={onClose}
