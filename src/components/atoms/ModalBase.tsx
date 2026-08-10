@@ -57,9 +57,9 @@ export const ModalBase: React.FC<ModalBaseProps> = ({
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             style={{
-              maxHeight: 'calc(100dvh - env(safe-area-inset-top, 44px) - env(safe-area-inset-bottom, 24px) - 32px)',
-              marginTop: 'calc(env(safe-area-inset-top, 0px) + 16px)',
-              marginBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)',
+              maxHeight: 'calc(100dvh - max(60px, calc(env(safe-area-inset-top, 0px) + 20px)) - env(safe-area-inset-bottom, 24px) - 20px)',
+              marginTop: 'max(60px, calc(env(safe-area-inset-top, 0px) + 20px))',
+              marginBottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)',
             }}
             className={`relative w-full ${maxWidthClasses[maxWidth]} overflow-y-auto rounded-3xl shadow-2xl backdrop-blur-2xl z-10 p-4 sm:p-6 font-sans border transition-colors ${
               isDark
