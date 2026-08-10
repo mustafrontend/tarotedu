@@ -20,10 +20,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenPaywall }) => {
 
   return (
     <>
-      <header className={`sticky top-0 z-40 backdrop-blur-md px-4 py-3 font-sans transition-colors ${
+      <header
+        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 10px)' }}
+        className={`sticky top-0 z-40 backdrop-blur-md px-4 pb-3 font-sans transition-colors ${
         isDark
-          ? 'bg-slate-950/85 border-b-[0.5px] border-purple-900/40 text-white'
-          : 'bg-white/90 border-b border-slate-200 text-slate-900 shadow-sm'
+          ? 'bg-slate-950/90 border-b-[0.5px] border-purple-900/40 text-white shadow-lg'
+          : 'bg-white/95 border-b border-slate-200 text-slate-900 shadow-sm'
       }`}>
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">

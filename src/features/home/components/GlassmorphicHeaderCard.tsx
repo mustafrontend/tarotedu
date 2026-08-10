@@ -64,13 +64,13 @@ export const GlassmorphicHeaderCard: React.FC<GlassmorphicHeaderCardProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-1">
-          <Button variant="mystic" size="md" onClick={() => onNavigate('daily')}>
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+          <Button variant="mystic" size="md" onClick={() => onNavigate('daily')} className="shrink-0">
             <Sun className="w-4 h-4 text-amber-300" />
             <span>{t('hero.ctaDaily')}</span>
           </Button>
 
-          <span className="text-xs font-bold text-purple-200">
+          <span className="text-[11px] font-bold text-purple-200/90 shrink-0">
             {t('home.freeDailyDraw')}
           </span>
         </div>
