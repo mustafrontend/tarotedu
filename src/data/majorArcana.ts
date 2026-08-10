@@ -15,7 +15,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['adventure', 'risk', 'innocence', 'spontaneity', 'new beginning'],
       reversed: ['recklessness', 'thoughtless', 'naive', 'foolish', 'careless']
     },
-    image: '0-the-fool.png',
+    image: '/cards/Gemini_Generated_Image_1koofo1koofo1koo.jfif',
     videoUrl: '/cards/Slow_motion_cinematic_pan_of_a.mp4',
     guidance: 'Trust in the universe and take that leap of faith. The Fool encourages you to begin your journey with optimism and openness.'
   },
@@ -33,7 +33,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['manifestation', 'resourcefulness', 'power', 'inspired action', 'willpower'],
       reversed: ['manipulation', 'untapped talents', 'deception', 'poor planning', 'lack of focus']
     },
-    image: '1-the-magician.png',
+    image: '/cards/Gemini_Generated_Image_20c8tn20c8tn20c8.jfif',
     videoUrl: '/cards/The_Magician_raising_his_wand.mp4',
     guidance: 'You have the tools and power to manifest your desires. Focus your intention and take inspired action toward your goals.'
   },
@@ -51,7 +51,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['intuition', 'wisdom', 'secrets', 'divine feminine', 'subconscious'],
       reversed: ['confusion', 'secrets', 'hidden agendas', 'ignored intuition', 'imbalance']
     },
-    image: '2-the-priestess.png',
+    image: '/cards/Gemini_Generated_Image_4qrd1w4qrd1w4qrd.jfif',
     videoUrl: '/cards/Soft_moonlight_pulsing_behind.mp4',
     guidance: 'Listen to your inner voice. Trust your intuition and seek wisdom from within. The answers you seek are already within you.'
   },
@@ -69,7 +69,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['fertility', 'femininity', 'beauty', 'abundance', 'nature', 'nurturing'],
       reversed: ['insecurity', 'neglect', 'lack of care', 'dependence', 'emptiness']
     },
-    image: '3-the-empress.png',
+    image: '/cards/Gemini_Generated_Image_5ednm95ednm95edn.jfif',
     videoUrl: '/cards/Golden_wheat_swaying_in_a_gent.mp4',
     guidance: 'Embrace your creative power and nurture yourself and others. This is a time of abundance and manifestation through care and compassion.'
   },
@@ -87,7 +87,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['authority', 'leadership', 'power', 'control', 'stability', 'father figure'],
       reversed: ['tyranny', 'rigidity', 'domination', 'excessive control', 'lack of discipline']
     },
-    image: '4-the-emperor.png',
+    image: '/cards/Gemini_Generated_Image_6iaukj6iaukj6iau.jfif',
     videoUrl: '/cards/Dramatic_slow_zoom_toward_the.mp4',
     guidance: 'Take charge of your situation with confidence and authority. Establish structure and order. Lead with wisdom and integrity.'
   },
@@ -105,7 +105,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['tradition', 'wisdom', 'religion', 'conformity', 'morality', 'ethics'],
       reversed: ['dogmatism', 'unorthodoxy', 'rebellion', 'new perspective', 'non-conformity']
     },
-    image: '5-the-hierophant.png',
+    image: '/cards/Gemini_Generated_Image_7103x67103x67103.jfif',
     videoUrl: '/cards/Light_streaming_through_staine.mp4',
     guidance: 'Seek guidance from established traditions and mentors. Ground yourself in solid principles while respecting traditional wisdom.'
   },
@@ -123,7 +123,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['love', 'harmony', 'relationships', 'choices', 'alignment', 'union'],
       reversed: ['disharmony', 'imbalance', 'conflict', 'misalignment', 'detachment']
     },
-    image: '6-the-lovers.png',
+    image: '/cards/Gemini_Generated_Image_cnjlwqcnjlwqcnjl.jfif',
     videoUrl: '/cards/create_video_Angel_Raphael_spr.mp4',
     guidance: 'Choose with your heart and align your choices with your deepest values. Nurture meaningful connections built on mutual respect.'
   },
@@ -141,7 +141,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['control', 'willpower', 'success', 'action', 'determination', 'victory'],
       reversed: ['lack of control', 'aggression', 'directionless', 'powerlessness', 'obstacle']
     },
-    image: '7-the-chariot.png',
+    image: '/cards/Gemini_Generated_Image_f0v1mff0v1mff0v1.jfif',
     videoUrl: '/cards/create_video_The_two_sphinxes.mp4',
     guidance: 'Harness your inner strength and determination to overcome obstacles. Focus your energy and drive forward with unwavering purpose.'
   },
@@ -159,7 +159,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['courage', 'patience', 'compassion', 'influence', 'inner strength'],
       reversed: ['self-doubt', 'weakness', 'insecurity', 'low energy', 'raw emotion']
     },
-    image: '8-strength.png',
+    image: '/cards/Gemini_Generated_Image_ffy70tffy70tffy7.jfif',
     videoUrl: '/cards/create_video_Woman_gently_pett.mp4',
     guidance: 'True strength comes from quiet conviction, compassion, and patience rather than brute force. Gentle mastery prevails.'
   },
@@ -177,7 +177,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['solitude', 'introspection', 'searching', 'guidance', 'inner wisdom'],
       reversed: ['loneliness', 'isolation', 'withdrawn', 'lost way', 'rejection']
     },
-    image: '9-the-hermit.png',
+    image: '/cards/Gemini_Generated_Image_fh3nh8fh3nh8fh3n.jfif',
     videoUrl: '/cards/create_video_Snow_falling_gent.mp4',
     guidance: 'Step back from outer noise to look inward. The light of your own wisdom will illuminate the path ahead.'
   },
@@ -195,7 +195,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['karma', 'destiny', 'cycles', 'change', 'good luck', 'turning point'],
       reversed: ['bad luck', 'resistance', 'unwelcome change', 'negative cycle']
     },
-    image: '10-wheel-of-fortune.png',
+    image: '/cards/Gemini_Generated_Image_hsdehlhsdehlhsde.jfif',
     videoUrl: '/cards/Mystic_tarot_card_of_the_Wheel.mp4',
     guidance: 'Embrace the natural ebbs and flows of life. What goes around comes around; adapt gracefully to turning tides.'
   },
@@ -213,7 +213,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['justice', 'fairness', 'truth', 'truthfulness', 'accountability'],
       reversed: ['unfairness', 'bias', 'dishonesty', 'avoiding truth']
     },
-    image: '11-justice.png',
+    image: '/cards/Gemini_Generated_Image_jhqilbjhqilbjhqi.jfif',
     videoUrl: '/cards/Golden_scales_gently_balancing.mp4',
     guidance: 'Act with absolute honesty and clarity. All actions carry consequences, so balance head and heart with equity.'
   },
@@ -231,7 +231,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['surrender', 'pause', 'perspective', 'letting go', 'enlightenment'],
       reversed: ['stalling', 'resistance', 'unwillingness', 'delays']
     },
-    image: '12-the-hanged-man.png',
+    image: '/cards/Gemini_Generated_Image_n1uncin1uncin1un.jfif',
     videoUrl: '/cards/Golden_halo_pulsing_with_tranq.mp4',
     guidance: 'Allow yourself to pause. Viewing your world upside down unlocks profound fresh perspective and release.'
   },
@@ -249,7 +249,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['transformation', 'rebirth', 'endings', 'transition', 'new beginning'],
       reversed: ['resistance', 'holding on', 'fear of change', 'stagnation']
     },
-    image: '13-death.png',
+    image: '/cards/Gemini_Generated_Image_oye46ioye46ioye4.jfif',
     videoUrl: '/cards/create_video_White_horse_stepp.mp4',
     guidance: 'Clear away old structures to make room for vibrant rebirth. Transformation opens brand new horizons.'
   },
@@ -267,7 +267,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['balance', 'moderation', 'patience', 'harmony', 'synthesis'],
       reversed: ['imbalance', 'excess', 'impatience', 'discord']
     },
-    image: '14-temperance.png',
+    image: '/cards/Gemini_Generated_Image_pchd53pchd53pchd.jfif',
     videoUrl: '/cards/Liquid_light_continuously_flow.mp4',
     guidance: 'Find the middle path. Blending opposing elements with patience creates middle-ground harmony.'
   },
@@ -285,7 +285,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['attachment', 'restriction', 'illusion', 'temptation', 'shadow self'],
       reversed: ['freedom', 'detachment', 'breaking chains', 'reclaiming power']
     },
-    image: '15-the-devil.png',
+    image: '/cards/Gemini_Generated_Image_qkmj7uqkmj7uqkmj.jfif',
     videoUrl: '/cards/Torch_flame_flickering_in_dark.mp4',
     guidance: 'Examine self-imposed chains and illusions. You hold the power to slip free from unhealthy dependencies.'
   },
@@ -303,7 +303,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['upheaval', 'sudden change', 'awakening', 'revelation', 'breakthrough'],
       reversed: ['averting disaster', 'delaying change', 'fear of breakdown']
     },
-    image: '16-the-tower.png',
+    image: '/cards/Gemini_Generated_Image_rl5k00rl5k00rl5k.jfif',
     videoUrl: '/videos/create_video_Vertical_D.mp4',
     guidance: 'When false foundations crumble, divine truth shines through. Upheaval clears illusions for authentic growth.'
   },
@@ -321,7 +321,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['hope', 'faith', 'inspiration', 'renewal', 'serenity', 'blessings'],
       reversed: ['despair', 'discouragement', 'faithlessness', 'cynicism']
     },
-    image: '17-the-star.png',
+    image: '/cards/Gemini_Generated_Image_t2sfz4t2sfz4t2sf.jfif',
     videoUrl: '/cards/Water_pouring_into_pond_creati.mp4',
     guidance: 'Keep your gaze fixed on hope and higher inspiration. Peace and cosmic renewal follow the storm.'
   },
@@ -339,7 +339,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['illusion', 'intuition', 'subconscious', 'dreams', 'mystery'],
       reversed: ['clarity', 'unveiling', 'overcoming fear', 'repressed thoughts']
     },
-    image: '18-the-moon.png',
+    image: '/cards/Gemini_Generated_Image_u4rwamu4rwamu4rw.jfif',
     videoUrl: '/cards/Golden_dew_drops_falling_from.mp4',
     guidance: 'Trust your deep subconscious intuition when light dims. Shadows pass as you move toward morning truth.'
   },
@@ -357,7 +357,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['joy', 'success', 'vitality', 'warmth', 'clarity', 'abundance'],
       reversed: ['temporary sadness', 'clouded joy', 'delayed warmth']
     },
-    image: '19-the-sun.png',
+    image: '/cards/Gemini_Generated_Image_vm5ze5vm5ze5vm5z.jfif',
     videoUrl: '/cards/create_video_Golden_sun_rays_e.mp4',
     guidance: 'Radiate joy, warmth, and unclouded authenticity. Success and radiant vitality shine upon your journey.'
   },
@@ -375,7 +375,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['calling', 'rebirth', 'reckoning', 'awakening', 'absolution'],
       reversed: ['self-doubt', 'harsh criticism', 'ignoring intuition']
     },
-    image: '20-judgement.png',
+    image: '/cards/Gemini_Generated_Image_vxu0jxvxu0jxvxu0.jfif',
     videoUrl: '/cards/create_video_Soundwave_rays_em.mp4',
     guidance: 'Answer your higher calling with clarity and confidence. The past is integrated as rebirth unfolds.'
   },
@@ -393,7 +393,7 @@ export const majorArcana: TarotCard[] = [
       upright: ['completion', 'fulfillment', 'wholeness', 'accomplishment', 'harmony'],
       reversed: ['unfinished', 'seeking closure', 'delays', 'lacking completion']
     },
-    image: '21-the-world.png',
+    image: '/cards/Gemini_Generated_Image_wcw74cwcw74cwcw7.jfif',
     videoUrl: '/cards/Dancer_spinning_gracefully_ins.mp4',
     guidance: 'A major cycle has reached victorious completion. You stand in wholeness, ready for your next cosmic ascent.'
   }

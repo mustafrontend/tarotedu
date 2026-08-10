@@ -48,8 +48,13 @@ export const SpreadCardItem: React.FC<SpreadCardItemProps> = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="w-12 h-20 rounded-xl bg-gradient-to-tr from-purple-950 via-slate-950 to-indigo-950 border border-purple-400/40 text-amber-300 overflow-hidden shrink-0 shadow-md relative flex items-center justify-center">
-            <span className="text-xs font-mono font-bold">#{readingCard.card.number}</span>
+          <div className="w-12 h-20 rounded-xl bg-slate-950 border border-purple-400/40 text-amber-300 overflow-hidden shrink-0 relative shadow-md">
+            <img
+              src={readingCard.card.image}
+              alt={localizedName}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h4 className={`text-sm font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>{localizedName}</h4>

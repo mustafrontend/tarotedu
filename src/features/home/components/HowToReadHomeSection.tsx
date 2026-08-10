@@ -35,21 +35,24 @@ export const HowToReadHomeSection: React.FC<HowToReadHomeSectionProps> = ({ onNa
               }`}
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>A'dan Z'ye Rehber</span>
+              <span>{t('howToRead.badge', "A'dan Z'ye Rehber")}</span>
             </div>
             <h3
               className={`text-lg font-black tracking-tight flex items-center gap-2 ${
                 isDark ? 'text-white' : 'text-slate-900'
               }`}
             >
-              <span>🔮 Tarot Nasıl Bakılır?</span>
+              <span>{t('howToRead.title', '🔮 Tarot Nasıl Bakılır?')}</span>
             </h3>
             <p
               className={`text-xs font-medium leading-relaxed ${
                 isDark ? 'text-purple-200/80' : 'text-slate-600'
               }`}
             >
-              Hem TarotEdu uygulamamızla dijital kart okumayı hem de geleneksel fiziksel tarot destesiyle esoterik bakış tekniklerini öğrenin.
+              {t(
+                'howToRead.subtitle',
+                'Hem TarotEdu uygulamamızla dijital kart okumayı hem de geleneksel fiziksel tarot destesiyle esoterik bakış tekniklerini öğrenin.'
+              )}
             </p>
           </div>
 
@@ -57,7 +60,7 @@ export const HowToReadHomeSection: React.FC<HowToReadHomeSectionProps> = ({ onNa
             onClick={() => setIsModalOpen(true)}
             className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 px-4 py-2.5 rounded-2xl text-xs font-bold text-amber-300 shadow-lg border border-purple-400/40 transition-all cursor-pointer shrink-0 group-hover:scale-105"
           >
-            <span>Rehberi İncele</span>
+            <span>{t('howToRead.cta', 'Rehberi İncele')}</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -79,10 +82,10 @@ export const HowToReadHomeSection: React.FC<HowToReadHomeSectionProps> = ({ onNa
             <Smartphone className="w-4 h-4 text-purple-500 shrink-0" />
             <div>
               <h4 className={`text-xs font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                1. Uygulama İle Bakış
+                {t('howToRead.step1Title', '1. Uygulama İle Bakış')}
               </h4>
               <p className={`text-[10px] font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
-                Dijital deste & kehanet
+                {t('howToRead.step1Sub', 'Dijital deste & kehanet')}
               </p>
             </div>
           </div>
@@ -98,10 +101,10 @@ export const HowToReadHomeSection: React.FC<HowToReadHomeSectionProps> = ({ onNa
             <Layers className="w-4 h-4 text-amber-500 shrink-0" />
             <div>
               <h4 className={`text-xs font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                2. Fiziksel Deste İle
+                {t('howToRead.step2Title', '2. Fiziksel Deste İle')}
               </h4>
               <p className={`text-[10px] font-medium ${isDark ? 'text-purple-200/80' : 'text-slate-600'}`}>
-                Sembolizm & kalp eli
+                {t('howToRead.step2Sub', 'Sembolizm & kalp eli')}
               </p>
             </div>
           </div>

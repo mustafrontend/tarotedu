@@ -37,9 +37,12 @@ export const AcademyCardItem: React.FC<AcademyCardItemProps> = ({
           : 'bg-slate-900 border-purple-400/40 hover:border-purple-600'
       }`}
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-purple-950 via-slate-950 to-indigo-950 flex items-center justify-center p-2">
-        <span className="text-2xl font-black text-amber-300/40 font-mono">#{card.number}</span>
-      </div>
+      <img
+        src={card.image}
+        alt={card.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+      />
 
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-purple-950/50 p-3 flex flex-col justify-between z-10">
         <div className="flex items-center justify-between text-[11px] font-mono font-bold text-amber-300">
