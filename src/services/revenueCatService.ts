@@ -2,8 +2,13 @@ import { Capacitor } from '@capacitor/core'
 import { Purchases, LOG_LEVEL, PurchasesPackage } from '@revenuecat/purchases-capacitor'
 import { tarotApiService } from './tarotApiService'
 
-export const REVENUECAT_API_KEY = 'appl_KYCMWKtHLpIvVfRoVOlwEOgfuRZ'
+export const REVENUECAT_API_KEY = 'appl_LGDebvaaUWDibaQSRWAGbbCVpNz'
 export const REVENUECAT_ENTITLEMENT_ID = 'pro_access'
+
+export interface PurchaseResult {
+  success: boolean
+  error?: string
+}
 
 export const initializeRevenueCat = async (): Promise<boolean> => {
   try {
@@ -13,7 +18,7 @@ export const initializeRevenueCat = async (): Promise<boolean> => {
     if (platform === 'ios' || platform === 'android') {
       await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG })
       await Purchases.configure({ apiKey: REVENUECAT_API_KEY })
-      console.log('[RevenueCat] Initialized on mobile')
+      console.log('[RevenueCat] Initialized on mobile with token:', REVENUECAT_API_KEY)
       return true
     } else {
       console.log('[RevenueCat] Web mode active')
@@ -34,27 +39,38 @@ export const checkIsProUser = async (): Promise<boolean> => {
   }
 }
 
-export const purchaseProPackage = async (packageId: 'annual' | 'monthly' | 'lifetime'): Promise<boolean> => {
+export const purchaseProPackage = async (
+  packageId: 'annual' | 'monthly' | 'lifetime'
+): Promise<PurchaseResult> => {
   try {
     const platform = Capacitor.getPlatform()
     if (platform !== 'ios' && platform !== 'android') {
-      return true // Web sandbox
+      return { success: true } // Web sandbox
     }
 
     const offerings = await Purchases.getOfferings()
     let availablePackages: PurchasesPackage[] = offerings.current?.availablePackages || []
 
     if (availablePackages.length > 0) {
-      const target = availablePackages.find(
-        (pkg: PurchasesPackage) => pkg.identifier.toLowerCase().includes(packageId)
-      ) || availablePackages[0]
+      const target =
+        availablePackages.find((pkg: PurchasesPackage) =>
+          pkg.identifier.toLowerCase().includes(packageId)
+        ) || availablePackages[0]
 
       const { customerInfo } = await Purchases.purchasePackage({ aPackage: target })
-      const isSuccess = customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
+      const isSuccess =
+        customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
+
       if (isSuccess) {
         tarotApiService.notifyPurchase(packageId, target.product?.priceString || 'Standard')
+        return { success: true }
+      } else {
+        return {
+          success: false,
+          error:
+            'Satın alma tamamlandı ancak RevenueCat üzerinde "pro_access" yetkisi aktifleşmedi.',
+        }
       }
-      return isSuccess
     }
 
     const productIdMap = {
@@ -67,21 +83,58 @@ export const purchaseProPackage = async (packageId: 'annual' | 'monthly' | 'life
     const { products } = await Purchases.getProducts({ productIdentifiers: [productId] })
     if (products && products.length > 0) {
       const { customerInfo } = await Purchases.purchaseStoreProduct({ product: products[0] })
-      return customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
+      const isSuccess =
+        customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
+      return isSuccess
+        ? { success: true }
+        : {
+            success: false,
+            error: 'Ürün satın alındı fakat pro_access yetkisi tanımlı görünmüyor.',
+          }
     }
-    return false
+
+    return {
+      success: false,
+      error: `RevenueCat teklif paketi (Offerings) veya ürün bulunamadı. Lütfen RevenueCat panelinden '${productId}' ürününü tanımlayın.`,
+    }
   } catch (error: any) {
     console.error('[RevenueCat] Purchase failed:', error)
-    return false
+    const errMessage =
+      error?.message || (typeof error === 'string' ? error : JSON.stringify(error))
+    return {
+      success: false,
+      error: `Satın Alma Hatası: ${errMessage}`,
+    }
   }
 }
 
-export const restoreProPurchases = async (): Promise<boolean> => {
+export const restoreProPurchases = async (): Promise<PurchaseResult> => {
   try {
+    const platform = Capacitor.getPlatform()
+    if (platform !== 'ios' && platform !== 'android') {
+      return { success: true }
+    }
+
     const { customerInfo } = await Purchases.restorePurchases()
-    return customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
-  } catch (error) {
+    const isSuccess =
+      customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined
+
+    if (isSuccess) {
+      return { success: true }
+    } else {
+      return {
+        success: false,
+        error:
+          'Geçmiş satın alımlar sorgulandı ancak bu Apple ID hesabında aktif bir PRO abonelik bulunamadı.',
+      }
+    }
+  } catch (error: any) {
     console.error('[RevenueCat] Restore failed:', error)
-    return false
+    const errMessage =
+      error?.message || (typeof error === 'string' ? error : JSON.stringify(error))
+    return {
+      success: false,
+      error: `Geri Yükleme Hatası: ${errMessage}`,
+    }
   }
 }

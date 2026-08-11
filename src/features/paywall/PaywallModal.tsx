@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { Crown, CheckCircle2, ShieldCheck, X } from 'lucide-react'
+import { Crown, CheckCircle2, ShieldCheck, X, AlertTriangle } from 'lucide-react'
 import { useTarotStore } from '../../store/tarotStore'
 import { purchaseProPackage, restoreProPurchases } from '../../services/revenueCatService'
 import { Button } from '../../components/atoms/Button'
@@ -17,6 +17,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
   const setIsPro = useTarotStore((state) => state.setIsPro)
   const [selectedPlan, setSelectedPlan] = useState<'annual' | 'monthly' | 'lifetime'>('annual')
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -33,12 +34,17 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
 
   const handlePurchase = async () => {
     setIsLoading(true)
+    setErrorMessage(null)
     try {
-      const isSuccess = await purchaseProPackage(selectedPlan)
-      if (isSuccess) {
+      const res = await purchaseProPackage(selectedPlan)
+      if (res.success) {
         setIsPro(true)
         onClose()
+      } else if (res.error) {
+        setErrorMessage(res.error)
       }
+    } catch (e: any) {
+      setErrorMessage(e?.message || 'Bilinmeyen bir ödeme hatası oluştu.')
     } finally {
       setIsLoading(false)
     }
@@ -46,15 +52,18 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
 
   const handleRestore = async () => {
     setIsLoading(true)
+    setErrorMessage(null)
     try {
-      const isRestored = await restoreProPurchases()
-      if (isRestored) {
+      const res = await restoreProPurchases()
+      if (res.success) {
         setIsPro(true)
-        alert('Pro membership successfully restored!')
+        alert('Pro üyeliğiniz başarıyla geri yüklendi!')
         onClose()
-      } else {
-        alert('No active Pro purchase found to restore.')
+      } else if (res.error) {
+        setErrorMessage(res.error)
       }
+    } catch (e: any) {
+      setErrorMessage(e?.message || 'Geri yükleme işlemi başarısız oldu.')
     } finally {
       setIsLoading(false)
     }
@@ -118,6 +127,24 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
               </div>
             ))}
           </div>
+
+          {errorMessage && (
+            <div className="mb-4 p-3.5 rounded-2xl bg-rose-950/90 border border-rose-500/60 text-rose-200 text-xs font-medium space-y-1 shadow-xl">
+              <div className="flex items-center justify-between font-bold text-rose-300">
+                <span className="flex items-center gap-1.5">
+                  <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                  Ödeme / RevenueCat Hata Bildirimi
+                </span>
+                <button
+                  onClick={() => setErrorMessage(null)}
+                  className="text-rose-400 hover:text-white text-xs px-1"
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="text-[11px] leading-relaxed break-words font-sans">{errorMessage}</p>
+            </div>
+          )}
 
           <PaywallPlanSelector
             selectedPlan={selectedPlan}
